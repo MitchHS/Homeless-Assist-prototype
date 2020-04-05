@@ -27,6 +27,28 @@ public class User {
         this.postcode = postcode;
     }
 
+    public User (String id, String email, String password, int userType, String name, String lastName, String suburb)
+    {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.userType = userType;
+        this.name= name;
+        this.lastName = lastName;
+        this.suburb = suburb;
+    }
+
+    public String getEmail() {return this.email;}
+    public String getPassword() {return  this.password;}
+    public int getUserType() {return this.userType;}
+    public String getName() {return this.name;}
+    public String getLastName() {return this.lastName;}
+    public String getStreetName() {return this.streetName;}
+    public String getStreetNumber() {return this.streetNumber;}
+    public String getSuburb() {return this.suburb;}
+    public String getPostcode() {return this.postcode;}
+
+
 
 //    User
 //            ID

@@ -27,5 +27,6 @@ public class Resource {
     public String getAddress() {return this.address;}
     public int getQuanity() {return this.quanity;}
     public String getUserID() {return this.userID;}
+    public String getDescription() {return this.description;}
 
 }

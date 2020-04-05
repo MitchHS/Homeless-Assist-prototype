@@ -12,10 +12,10 @@ public class User {
     String suburb = "suburb";
     String postcode = "0000";
 
-    public User (String id, String email, String password, int userType, String name, String lastName, String streetNumber,
+    public User ( String email, String password, int userType, String name, String lastName, String streetNumber,
                  String streetName, String suburb, String postcode)
     {
-        this.id = id;
+       // this.id = id;
         this.email = email;
         this.password = password;
         this.userType = userType;
@@ -27,9 +27,9 @@ public class User {
         this.postcode = postcode;
     }
 
-    public User (String id, String email, String password, int userType, String name, String lastName, String suburb)
+    public User ( String email, String password, int userType, String name, String lastName, String suburb)
     {
-        this.id = id;
+      //  this.id = id;
         this.email = email;
         this.password = password;
         this.userType = userType;

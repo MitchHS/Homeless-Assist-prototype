@@ -1,5 +1,8 @@
 package com.u3100289.homelessAssist;
 
+import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,6 +14,10 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -18,10 +25,42 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
+//        Resource res = new Resource("0", "Food", "Coffee", "testPlace", "Test address", 1, "admin");
+//        String testId = db.insertResource(res);
+        User admin = new User("admin@example.com", "password", 1, "adminName", "adminLast", "13",
+                "FakeStreet", "FakeSub", "2913" );
+
+
+
+        String id = db.insertUser(admin);
+
+        if(id!=null){
+            Context context = getApplicationContext();
+            CharSequence text = "We did it reddit" + id;
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
 
 
 
     }
+
+    public void toRegister(View v) {
+
+        Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivity(i);
+    }
+
+
+
+
+        public void onSign(View view) {
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
 
 
 

@@ -26,6 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String USER_COLUMN_PASSWORD = "password";
     public static final String USER_COLUMN_TYPE = "userType";
     public static final String USER_COLUMN_NAME = "name";
+    public static final String USER_COLUMN_LASTNAME = "lastName";
     public static final String USER_COLUMN_STREET_NUMBER = "streetNumber";
     public static final String USER_COLUMN_STREET_NAME = "streetName";
     public static final String USER_COLUMN_SUBURB = "suburb";
@@ -42,26 +43,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table " + USER_TABLE_NAME + "(" +
                 USER_COLUMN_ID + "integer primary key, " +
-                USER_COLUMN_EMAIL + "text" +
-                USER_COLUMN_PASSWORD + "text" +
-                USER_COLUMN_TYPE + "integer" +
-                USER_COLUMN_NAME + "text" +
-                USER_COLUMN_STREET_NUMBER + "integer" +
-                USER_COLUMN_STREET_NAME + "text" +
-                USER_COLUMN_SUBURB + "text" +
-                USER_COLUMN_POSTCODE + "integer)"
+                USER_COLUMN_EMAIL + " text, " +
+                USER_COLUMN_PASSWORD + " text, " +
+                USER_COLUMN_TYPE + " integer, " +
+                USER_COLUMN_NAME + " text, " +
+                USER_COLUMN_LASTNAME + " text," +
+                USER_COLUMN_STREET_NUMBER + " integer, " +
+                USER_COLUMN_STREET_NAME + " text, " +
+                USER_COLUMN_SUBURB + " text, " +
+                USER_COLUMN_POSTCODE + " integer)"
         );
+
 
         db.execSQL("create table " + RESOURCE_TABLE_NAME + "(" +
                 RESOURCE_COLUMN_ID + " integer primary key, " +
                 RESOURCE_COLUMN_TYPE + " text, " +
                 RESOURCE_COLUMN_DESCRIPTION + " text, " +
-                RESOURCE_COLUMN_PLACEID + "text," +
-                RESOURCE_COLUMN_ADDRESS + "text," +
-                RESOURCE_COLUMN_QUANTITY + "integer CHECK("+RESOURCE_COLUMN_QUANTITY+">0),  " +
-                RESOURCE_COLUMN_USERID + "integer NOT NULL, " +
-                "FOREIGN KEY ("+RESOURCE_COLUMN_USERID+") REFERENCES "+USER_TABLE_NAME+"("+USER_COLUMN_ID+"));"
-        );
+                RESOURCE_COLUMN_PLACEID + " text, " +
+                RESOURCE_COLUMN_ADDRESS + " text, " +
+                RESOURCE_COLUMN_QUANTITY + " integer, " +
+                RESOURCE_COLUMN_USERID + " integer, " +
+                " FOREIGN KEY ("+RESOURCE_COLUMN_USERID+") REFERENCES "+USER_TABLE_NAME+"("+USER_COLUMN_ID+")) ");
+
 //                COLUMN_URI + " integer, " +
 //                COLUMN_CONTENT + " text)" );
                 //+ TASK_CAT + " integer,"
@@ -112,6 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(USER_COLUMN_PASSWORD, user.getPassword());
         contentValues.put(USER_COLUMN_TYPE, user.getUserType());
         contentValues.put(USER_COLUMN_NAME, user.getName());
+        contentValues.put(USER_COLUMN_LASTNAME, user.getLastName());
         contentValues.put(USER_COLUMN_STREET_NUMBER, user.getStreetNumber());
         contentValues.put(USER_COLUMN_STREET_NAME, user.getStreetName());
         contentValues.put(USER_COLUMN_SUBURB, user.getSuburb());

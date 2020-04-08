@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.CheckBox;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -27,6 +28,16 @@ public class RegisterActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+
+
+    public void itemClicked(View v) {
+        //code to check if this checkbox is checked!
+        CheckBox noAddress = findViewById(R.id.permAddress);
+        if(noAddress.isChecked()){
+            setContentView(R.layout.content_register2);
+        }
     }
 
 }

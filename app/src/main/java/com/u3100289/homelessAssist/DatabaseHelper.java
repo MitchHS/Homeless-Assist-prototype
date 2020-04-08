@@ -2,10 +2,12 @@ package com.u3100289.homelessAssist;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
+
+import static android.os.Build.ID;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -64,13 +66,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 RESOURCE_COLUMN_QUANTITY + " integer, " +
                 RESOURCE_COLUMN_USERID + " integer, " +
                 " FOREIGN KEY ("+RESOURCE_COLUMN_USERID+") REFERENCES "+USER_TABLE_NAME+"("+USER_COLUMN_ID+")) ");
-
-//                COLUMN_URI + " integer, " +
-//                COLUMN_CONTENT + " text)" );
-                //+ TASK_CAT + " integer,"
-                //        + " FOREIGN KEY ("+TASK_CAT+") REFERENCES "+CAT_TABLE+"("+CAT_ID+"));";
-
-
     }
 
     @Override
@@ -88,6 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<Resource> resourceList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + RESOURCE_TABLE_NAME, null);
+
         res.moveToFirst();
 
         while(res.isAfterLast() == false)
@@ -105,6 +101,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
         return resourceList;
+    }
+
+//    public boolean userExists(String email)
+//    {
+//        String result;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        boolean exist = false;
+////        String query = "SELECT * FROM " + USER_TABLE_NAME + " WHERE " + USER_COLUMN_NAME + " = " + "sasdasd";
+////
+////        try{
+////            Cursor res = db.rawQuery(query, null);
+////            if(res.isNull(0))
+////            {
+////                exist = true;
+////            } else {exist = false;}
+////
+////        } catch (Exception e ){System.out.println("Exception QUERY");}
+////        return exist;
+//
+//
+//
+//    }
+
+    public boolean userExists(String email)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cs = db.query(USER_TABLE_NAME, new String[] {USER_COLUMN_EMAIL}, USER_COLUMN_EMAIL + "=" + "'" + email + "'", null, null, null, null);
+
+        if(cs.moveToFirst()){return true;}
+        return false;
+
+    }
+
+    public boolean userLogin(String email, String password )
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cs = db.query(USER_TABLE_NAME, new String[] {USER_COLUMN_EMAIL, USER_COLUMN_PASSWORD}, USER_COLUMN_EMAIL + "=" + "'" + email + "'" + "AND " + USER_COLUMN_PASSWORD + "=" + "'" +
+                password + "'", null, null, null, null);
+
+        if(cs.moveToFirst()){return true;}
+        return false;
+
     }
 
     public String insertUser(User user)
@@ -142,20 +180,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    /*
 
-
-    public String insertEvent(Images event) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NAME, event.getTitle());
-        contentValues.put(COLUMN_URI, event.getUri());
-        contentValues.put(COLUMN_CONTENT, event.getContent());
-        long id = db.insert(TABLE_NAME, null, contentValues);
-        return Long.toString(id);
-
-    }
-     */
 
 
 

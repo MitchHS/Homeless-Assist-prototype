@@ -3,13 +3,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="-70dp">
 
         <TextView
             android:id="@+id/textView2"
@@ -98,12 +100,12 @@
             android:layout_width="254dp"
             android:layout_height="49dp"
             android:layout_marginStart="76dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="35dp"
             android:ems="10"
             android:hint="Street Number"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/addressTv" />
 
         <CheckBox
             android:id="@+id/permAddress"
@@ -111,6 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="108dp"
             android:layout_marginTop="32dp"
+            android:onClick="permAddressClick"
             android:text="No permanent address"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
@@ -128,7 +131,7 @@
             app:layout_constraintTop_toBottomOf="@+id/email" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/addressTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="168dp"
@@ -172,6 +175,18 @@
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/permAddressTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="24dp"
+            android:text="Please enter closest suburb to your location"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/busiBox" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

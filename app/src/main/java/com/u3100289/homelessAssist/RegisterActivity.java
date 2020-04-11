@@ -1,6 +1,7 @@
 package com.u3100289.homelessAssist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -262,10 +263,10 @@ public class RegisterActivity extends AppCompatActivity {
             toast.show();
         } else {
 
-            // if no address for perm register user with 2nd constructor.9
+            // if no address for perm register user with 2nd constructor.
             if(noAddress.isChecked() )
             {
-               // String email, String password, int userType, String name, String lastName, String suburb, String postcode)
+
                 User newUser = new User(email.getText().toString(), password.getText().toString(), 1, firstName.getText().toString(), lastName.getText().toString(), null, null,
                         suburb.getText().toString(), postcode.getText().toString());
                 db.insertUser(newUser);
@@ -282,7 +283,8 @@ public class RegisterActivity extends AppCompatActivity {
                 db.insertUser(newUser);
             }
 
-
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(i);
 
 
 

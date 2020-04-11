@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("create table " + USER_TABLE_NAME + "(" +
-                USER_COLUMN_ID + "integer primary key, " +
+                USER_COLUMN_ID + " integer primary key AUTOINCREMENT NOT NULL, " +
                 USER_COLUMN_EMAIL + " text, " +
                 USER_COLUMN_PASSWORD + " text, " +
                 USER_COLUMN_TYPE + " integer, " +
@@ -134,13 +134,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+//    public User getUser (String email, String password)
+//    {
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cs = db.query(USER_TABLE_NAME, new String[] {USER_COLUMN_EMAIL, USER_COLUMN_PASSWORD}, USER_COLUMN_EMAIL + "=" + "'" + email + "'" + "AND " + USER_COLUMN_PASSWORD + "=" + "'" +
+//                password + "'", null, null, null, null);
+//
+//        cs.moveToFirst();
+//        User user = new User(cs.getString(cs.getColumnIndex("id"))
+//        cs.getString(cs.getColumnIndex("title")
+//
+//
+//    }
+
     public boolean userLogin(String email, String password )
     {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cs = db.query(USER_TABLE_NAME, new String[] {USER_COLUMN_EMAIL, USER_COLUMN_PASSWORD}, USER_COLUMN_EMAIL + "=" + "'" + email + "'" + "AND " + USER_COLUMN_PASSWORD + "=" + "'" +
                 password + "'", null, null, null, null);
 
-        if(cs.moveToFirst()){return true;}
+        if(cs.moveToFirst()){ return true;}
         return false;
 
     }

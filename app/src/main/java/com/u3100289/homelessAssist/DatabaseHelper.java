@@ -148,14 +148,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public String insertUser(User user)
     {
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues contentValues = new ContentValues();
         contentValues.put(USER_COLUMN_EMAIL, user.getEmail());
         contentValues.put(USER_COLUMN_PASSWORD, user.getPassword());
         contentValues.put(USER_COLUMN_TYPE, user.getUserType());
         contentValues.put(USER_COLUMN_NAME, user.getName());
         contentValues.put(USER_COLUMN_LASTNAME, user.getLastName());
-        contentValues.put(USER_COLUMN_STREET_NUMBER, user.getStreetNumber());
-        contentValues.put(USER_COLUMN_STREET_NAME, user.getStreetName());
+        if(user.getStreetName() == null && user.getStreetNumber() == null)
+        {
+
+        }else {
+            contentValues.put(USER_COLUMN_STREET_NUMBER, user.getStreetNumber());
+            contentValues.put(USER_COLUMN_STREET_NAME, user.getStreetName());
+        }
+
         contentValues.put(USER_COLUMN_SUBURB, user.getSuburb());
         contentValues.put(USER_COLUMN_POSTCODE, user.getPostcode());
 

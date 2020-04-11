@@ -44,10 +44,14 @@ public class User {
     public int getUserType() {return this.userType;}
     public String getName() {return this.name.toLowerCase();}
     public String getLastName() {return this.lastName.toLowerCase();}
-    public String getStreetName() {return this.streetName.toLowerCase();}
-    public String getStreetNumber() {return this.streetNumber.toLowerCase();}
+    public String getStreetName() {
+        if(this.streetName == null){return null;} else {return this.streetName.toLowerCase();}
+    }
+    public String getStreetNumber() {
+        if(this.streetNumber == null){return null;} else {return this.streetNumber;}
+        }
     public String getSuburb() {return this.suburb.toLowerCase();}
-    public String getPostcode() {return this.postcode.toLowerCase();}
+    public String getPostcode() {return this.postcode;}
 
 
 

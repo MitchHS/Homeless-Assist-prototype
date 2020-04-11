@@ -72,6 +72,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(!noAddress.isChecked()){
 //            setContentView(R.layout.content_register2);
+            EditText streetNo = findViewById(R.id.streetNum);
+            streetNo.setVisibility(View.VISIBLE);
             EditText streetName = findViewById(R.id.streetName);
             streetName.setVisibility(View.VISIBLE);
             EditText suburb = findViewById(R.id.suburb);
@@ -82,6 +84,8 @@ public class RegisterActivity extends AppCompatActivity {
             TextView addressTv = findViewById(R.id.addressTv);
             addressTv.setVisibility(v.VISIBLE);
         }
+
+
     }
 
     public void isBusinessClick(View v){
@@ -91,6 +95,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(noAddress.isChecked() && isBusiness.isChecked())
         {
+            EditText streetNo = findViewById(R.id.streetNum);
+            streetNo.setVisibility(View.VISIBLE);
             EditText streetName = findViewById(R.id.streetName);
             streetName.setVisibility(View.VISIBLE);
             EditText suburb = findViewById(R.id.suburb);
@@ -260,7 +266,7 @@ public class RegisterActivity extends AppCompatActivity {
             if(noAddress.isChecked() )
             {
                // String email, String password, int userType, String name, String lastName, String suburb, String postcode)
-                User newUser = new User(email.getText().toString(), password.getText().toString(), 1, firstName.getText().toString(), lastName.getText().toString(),
+                User newUser = new User(email.getText().toString(), password.getText().toString(), 1, firstName.getText().toString(), lastName.getText().toString(), null, null,
                         suburb.getText().toString(), postcode.getText().toString());
                 db.insertUser(newUser);
             } else if(isBusiness.isChecked()) {

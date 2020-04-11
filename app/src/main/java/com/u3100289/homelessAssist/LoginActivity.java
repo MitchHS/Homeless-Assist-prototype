@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -55,18 +56,26 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void toRegister(View v) {
-
         Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(i);
     }
 
 
+    public void loginClick(View view) {
+        DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
+        EditText email = findViewById(R.id.emailText);
+        EditText password = findViewById(R.id.passwordText);
 
 
-        public void onSign(View view) {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        }
+        boolean login = db.userLogin(email.getText().toString(), password.getText().toString());
+
+        Context context = getApplicationContext();
+        CharSequence text = "user login : " + login;
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
 
 
 

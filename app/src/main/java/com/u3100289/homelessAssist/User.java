@@ -27,7 +27,7 @@ public class User {
         this.postcode = postcode;
     }
 
-    public User ( String email, String password, int userType, String name, String lastName, String suburb)
+    public User ( String email, String password, int userType, String name, String lastName, String suburb, String postcode)
     {
       //  this.id = id;
         this.email = email;
@@ -36,17 +36,18 @@ public class User {
         this.name= name;
         this.lastName = lastName;
         this.suburb = suburb;
+        this.postcode = postcode;
     }
 
-    public String getEmail() {return this.email;}
+    public String getEmail() {return this.email.toLowerCase();}
     public String getPassword() {return  this.password;}
     public int getUserType() {return this.userType;}
-    public String getName() {return this.name;}
-    public String getLastName() {return this.lastName;}
-    public String getStreetName() {return this.streetName;}
-    public String getStreetNumber() {return this.streetNumber;}
-    public String getSuburb() {return this.suburb;}
-    public String getPostcode() {return this.postcode;}
+    public String getName() {return this.name.toLowerCase();}
+    public String getLastName() {return this.lastName.toLowerCase();}
+    public String getStreetName() {return this.streetName.toLowerCase();}
+    public String getStreetNumber() {return this.streetNumber.toLowerCase();}
+    public String getSuburb() {return this.suburb.toLowerCase();}
+    public String getPostcode() {return this.postcode.toLowerCase();}
 
 
 

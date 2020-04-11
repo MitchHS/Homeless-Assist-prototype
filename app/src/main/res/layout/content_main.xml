@@ -51,6 +51,7 @@
         android:layout_height="57dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="38dp"
+        android:onClick="loginClick"
         android:text="Sign in"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgotText" />

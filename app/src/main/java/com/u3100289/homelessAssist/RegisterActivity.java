@@ -263,8 +263,8 @@ public class RegisterActivity extends AppCompatActivity {
             toast.show();
         } else {
 
-            // if no address for perm register user with 2nd constructor.
-            if(noAddress.isChecked() )
+           if(!db.userExists(email.getText().toString().toLowerCase())){ // if no address for perm register user with 2nd constructor.
+            if(noAddress.isChecked())
             {
 
                 User newUser = new User(email.getText().toString(), password.getText().toString(), 1, firstName.getText().toString(), lastName.getText().toString(), null, null,
@@ -282,9 +282,16 @@ public class RegisterActivity extends AppCompatActivity {
                         streetNum.getText().toString(), streetName.getText().toString(), suburb.getText().toString(), postcode.getText().toString());
                 db.insertUser(newUser);
             }
+               Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+               startActivity(i);
+           } else {
+               String text = "User already exists";
+               int duration = Toast.LENGTH_LONG;
+               Toast toast = Toast.makeText(context, text, duration);
+               toast.show();
+           }
 
-            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(i);
+
 
 
 

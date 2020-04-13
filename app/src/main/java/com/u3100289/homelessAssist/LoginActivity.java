@@ -67,14 +67,22 @@ public class LoginActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.passwordText);
 
 
-        boolean login = db.userLogin(email.getText().toString(), password.getText().toString());
+        boolean login = db.userLogin(email.getText().toString().toLowerCase(), password.getText().toString());
+        boolean exists = db.userExists(email.getText().toString());
 
-        Context context = getApplicationContext();
-        CharSequence text = "user login : " + login;
-        int duration = Toast.LENGTH_SHORT;
+        if(exists && login)
+        {
+            User user = db.getUser(email.getText().toString().toLowerCase(), password.getText().toString());
+            Context context = getApplicationContext();
+            CharSequence text = "user login : " + user.getEmail();
+            int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+
+
     }
 
 

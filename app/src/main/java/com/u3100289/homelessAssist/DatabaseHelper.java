@@ -103,26 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return resourceList;
     }
 
-//    public boolean userExists(String email)
-//    {
-//        String result;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        boolean exist = false;
-////        String query = "SELECT * FROM " + USER_TABLE_NAME + " WHERE " + USER_COLUMN_NAME + " = " + "sasdasd";
-////
-////        try{
-////            Cursor res = db.rawQuery(query, null);
-////            if(res.isNull(0))
-////            {
-////                exist = true;
-////            } else {exist = false;}
-////
-////        } catch (Exception e ){System.out.println("Exception QUERY");}
-////        return exist;
-//
-//
-//
-//    }
+
 
     public boolean userExists(String email)
     {
@@ -134,19 +115,55 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-//    public User getUser (String email, String password)
-//    {
-//
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cs = db.query(USER_TABLE_NAME, new String[] {USER_COLUMN_EMAIL, USER_COLUMN_PASSWORD}, USER_COLUMN_EMAIL + "=" + "'" + email + "'" + "AND " + USER_COLUMN_PASSWORD + "=" + "'" +
-//                password + "'", null, null, null, null);
-//
-//        cs.moveToFirst();
-//        User user = new User(cs.getString(cs.getColumnIndex("id"))
-//        cs.getString(cs.getColumnIndex("title")
-//
-//
-//    }
+    public User getUser (String email, String password) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor c = db.rawQuery("select * from " + USER_TABLE_NAME+" where " + USER_COLUMN_EMAIL + " =? and ")
+
+//        public User searchUser(String name) {
+//            User u = new User();
+//            SQLiteDatabase db = this.getWritableDatabase(); //get the database that was created in this instance
+//            Cursor c = db.rawQuery("select * from " + TABLE_NAME_User+" where username =?", new String[]{name});
+//            if (c.moveToLast()) {
+//                u.setUsername(c.getString(1));
+//                u.setEmail(c.getString(1));
+//                u.setImgUrl(c.getString(2));
+//                u.setScoreEng(c.getString(3));
+//                u.setScoreFr(c.getString(4));
+//                u.setScoreSpan(c.getString(5));
+//                u.setScoreGer(c.getString(6));
+//                u.setLevelFr(c.getString(7));
+//                u.setLevelEng(c.getString(8));
+//                u.setLevelSpan(c.getString(9));
+//                u.setLevelGer(c.getString(10));
+//                return u;
+
+        Cursor cs = db.query(USER_TABLE_NAME, new String[]{USER_COLUMN_ID, USER_COLUMN_EMAIL, USER_COLUMN_PASSWORD, USER_COLUMN_TYPE, USER_COLUMN_NAME, USER_COLUMN_LASTNAME,
+        USER_COLUMN_STREET_NUMBER, USER_COLUMN_STREET_NAME, USER_COLUMN_SUBURB, USER_COLUMN_POSTCODE}, USER_COLUMN_EMAIL + "=" + "'" + email + "'" + "AND " + USER_COLUMN_PASSWORD + "=" + "'" +
+                password + "'", null, null, null, null);
+
+        cs.moveToFirst();
+        while (cs.isAfterLast() == false) {
+
+            String id = cs.getString(cs.getColumnIndex(USER_COLUMN_ID));
+            String emailTmp = cs.getString(cs.getColumnIndex(USER_COLUMN_EMAIL));
+            String passwordTmp = cs.getString(cs.getColumnIndex(USER_COLUMN_PASSWORD));
+            String nme = cs.getString(cs.getColumnIndex(USER_COLUMN_NAME));
+            String lastName = cs.getString(cs.getColumnIndex(USER_COLUMN_LASTNAME));
+            String streetNo = cs.getString(cs.getColumnIndex(USER_COLUMN_STREET_NUMBER));
+            String streetName = cs.getString(cs.getColumnIndex(USER_COLUMN_STREET_NAME));
+            String postcode = cs.getString(cs.getColumnIndex(USER_COLUMN_POSTCODE));
+            String suburb = cs.getString(cs.getColumnIndex(USER_COLUMN_SUBURB));
+            int type = cs.getInt(cs.getColumnIndex(USER_COLUMN_TYPE));
+            
+            User user = new User(id, emailTmp, passwordTmp, type, nme, lastName, streetNo, streetName, suburb, postcode);
+            return user;
+        }
+
+        User user = new User("mitch", "password", 1, "mitch", "hunt", "12", "2914");
+        return user;
+
+    }
 
     public boolean userLogin(String email, String password )
     {

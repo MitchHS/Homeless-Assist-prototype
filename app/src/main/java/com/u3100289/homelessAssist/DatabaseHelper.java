@@ -143,7 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 password + "'", null, null, null, null);
 
         cs.moveToFirst();
-        while (cs.isAfterLast() == false) {
+
 
             String id = cs.getString(cs.getColumnIndex(USER_COLUMN_ID));
             String emailTmp = cs.getString(cs.getColumnIndex(USER_COLUMN_EMAIL));
@@ -155,13 +155,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String postcode = cs.getString(cs.getColumnIndex(USER_COLUMN_POSTCODE));
             String suburb = cs.getString(cs.getColumnIndex(USER_COLUMN_SUBURB));
             int type = cs.getInt(cs.getColumnIndex(USER_COLUMN_TYPE));
-            
+
             User user = new User(id, emailTmp, passwordTmp, type, nme, lastName, streetNo, streetName, suburb, postcode);
             return user;
-        }
 
-        User user = new User("mitch", "password", 1, "mitch", "hunt", "12", "2914");
-        return user;
 
     }
 

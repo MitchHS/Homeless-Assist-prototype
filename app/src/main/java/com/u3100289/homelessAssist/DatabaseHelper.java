@@ -50,8 +50,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 USER_COLUMN_TYPE + " integer, " +
                 USER_COLUMN_NAME + " text, " +
                 USER_COLUMN_LASTNAME + " text," +
-                USER_COLUMN_STREET_NUMBER + " integer, " +
-                USER_COLUMN_STREET_NAME + " text, " +
+                USER_COLUMN_STREET_NUMBER + " integer, " + // nullable
+                USER_COLUMN_STREET_NAME + " text, " +// nullable
                 USER_COLUMN_SUBURB + " text, " +
                 USER_COLUMN_POSTCODE + " integer)"
         );
@@ -59,13 +59,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table " + RESOURCE_TABLE_NAME + "(" +
                 RESOURCE_COLUMN_ID + " integer primary key, " +
-                RESOURCE_COLUMN_TYPE + " text, " +
-                RESOURCE_COLUMN_DESCRIPTION + " text, " +
-                RESOURCE_COLUMN_PLACEID + " text, " +
-                RESOURCE_COLUMN_ADDRESS + " text, " +
-                RESOURCE_COLUMN_QUANTITY + " integer, " +
+                RESOURCE_COLUMN_TYPE + " text, " + // Dropdown box of types in the app
+                RESOURCE_COLUMN_DESCRIPTION + " text, " + // User description of the resource
+                RESOURCE_COLUMN_PLACEID + " text, " + // Google API Place id for street Address
+                RESOURCE_COLUMN_ADDRESS + " text, " + // place.getAddress()
+                RESOURCE_COLUMN_QUANTITY + " integer, " + // Available quanity
                 RESOURCE_COLUMN_USERID + " integer, " +
-                " FOREIGN KEY ("+RESOURCE_COLUMN_USERID+") REFERENCES "+USER_TABLE_NAME+"("+USER_COLUMN_ID+")) ");
+                " FOREIGN KEY ("+RESOURCE_COLUMN_USERID+") REFERENCES "+USER_TABLE_NAME+"("+USER_COLUMN_ID+")) "); // FK of user
     }
 
     @Override

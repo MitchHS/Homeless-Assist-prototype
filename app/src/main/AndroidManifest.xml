@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/HiddenTitleTheme">
-        <activity android:name=".accountHome"></activity>
+        <activity android:name=".ResourceRegisterActivity"></activity>
+        <activity android:name=".accountHome" />
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"

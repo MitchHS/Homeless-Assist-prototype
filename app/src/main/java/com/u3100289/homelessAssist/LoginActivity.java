@@ -2,23 +2,14 @@ package com.u3100289.homelessAssist;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -75,10 +66,17 @@ public class LoginActivity extends AppCompatActivity {
             User user = db.getUser(email.getText().toString().toLowerCase(), password.getText().toString());
             Context context = getApplicationContext();
             CharSequence text = "user login : " + user.getEmail();
-            int duration = Toast.LENGTH_SHORT;
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+
+
+            Intent i = new Intent(getApplicationContext(), ResourceRegisterActivity.class);
+            i.putExtra("user", user );
+
+            startActivity(i);
+//            int duration = Toast.LENGTH_SHORT;
+//
+//            Toast toast = Toast.makeText(context, text, duration);
+//            toast.show();
         }
 
 

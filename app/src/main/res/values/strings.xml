@@ -22,4 +22,18 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="home_second">Home Second</string>
+    <string name="resource_prompt">Select a category</string>
+    <string name="resource_description">Enter a description here. Provide as much relevant information as possible</string>
+
+    <string-array name="resources">
+        <item>Choose a category</item>
+        <item>Food</item>
+        <item>Beverages</item>
+        <item>Clothing</item>
+        <item>Housing</item>
+        <item>Utilities</item>
+        <item>Hygiene Products</item>
+        <item>Other</item>
+
+    </string-array>
 </resources>

@@ -53,6 +53,10 @@ public class RegisterActivity extends AppCompatActivity {
             TextView addressTv = findViewById(R.id.addressTv);
             addressTv.setVisibility(v.GONE);
 
+            EditText businessName = findViewById(R.id.businessName);
+            businessName.setVisibility(View.GONE);
+
+
             if(isBusiness.isChecked() && noAddress.isChecked())
             {
                 isBusiness.toggle();
@@ -86,6 +90,13 @@ public class RegisterActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         CheckBox noAddress = findViewById(R.id.permAddress);
         CheckBox isBusiness = findViewById(R.id.busiBox);
+        EditText businessName = findViewById(R.id.businessName);
+        businessName.setVisibility(View.VISIBLE);
+
+        if(!isBusiness.isChecked())
+        {
+            businessName.setVisibility(View.GONE);
+        }
 
         if(noAddress.isChecked() && isBusiness.isChecked())
         {
@@ -97,6 +108,8 @@ public class RegisterActivity extends AppCompatActivity {
             suburb.setVisibility(v.VISIBLE);
             TextView noAddressTv = findViewById(R.id.permAddressTv);
             noAddressTv.setVisibility(v.GONE);
+
+            businessName.setVisibility(View.VISIBLE);
 
             TextView addressTv = findViewById(R.id.addressTv);
             addressTv.setVisibility(v.VISIBLE);
@@ -119,6 +132,8 @@ public class RegisterActivity extends AppCompatActivity {
         EditText streetName = findViewById(R.id.streetName);
         EditText suburb = findViewById(R.id.suburb);
         EditText postcode = findViewById(R.id.postcode);
+        EditText businessName = findViewById(R.id.businessName);
+        EditText contactNo = findViewById(R.id.contactNo);
         Context context = getApplicationContext();
         CheckBox isBusiness = findViewById(R.id.busiBox);
 
@@ -133,6 +148,12 @@ public class RegisterActivity extends AppCompatActivity {
             isComplete = false;
             incompleteFields.add(firstName);
             fields.add(" first name,");
+        }
+
+        if(contactNo.getText().toString().trim().length() <= 0 || !isInteger(contactNo.getText().toString())){
+            isComplete = false;
+            incompleteFields.add(contactNo);
+            fields.add(" contact number,");
         }
 
         if(lastName.getText().toString().trim().length() <= 0) {
@@ -198,6 +219,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
         } else {
+
+            if(isBusiness.isChecked())
+            {
+                if(businessName.getText().toString().length() <= 0)
+                {
+                    isComplete = false;
+                    incompleteFields.add(businessName);
+                    fields.add(" business name,");
+                }
+            }
             if (streetNum.getText().toString().trim().length() <= 0 || !isInteger(streetNum.getText().toString())) {
 
                 isComplete = false;
@@ -232,7 +263,6 @@ public class RegisterActivity extends AppCompatActivity {
         // Toast & Change text colour
         if(!isComplete)
         {
-
             String text = "Please complete the fields:";
 
             for(int x = 0; x < fields.size(); x++)
@@ -260,19 +290,19 @@ public class RegisterActivity extends AppCompatActivity {
             if(noAddress.isChecked())
             {
 
-                User newUser = new User(email.getText().toString(), password.getText().toString(), 1, firstName.getText().toString(), lastName.getText().toString(), null, null,
-                        suburb.getText().toString(), postcode.getText().toString());
+                User newUser = new User(email.getText().toString(), password.getText().toString(), 1, firstName.getText().toString(), lastName.getText().toString(), contactNo.getText().toString(), null, null,
+                        suburb.getText().toString(), postcode.getText().toString(), null);
                 db.insertUser(newUser);
             } else if(isBusiness.isChecked()) {
                 // Business type 2.
 
-                User newUser = new User(email.getText().toString(), password.getText().toString(), 2, firstName.getText().toString(), lastName.getText().toString(),
-                        streetNum.getText().toString(), streetName.getText().toString(), suburb.getText().toString(), postcode.getText().toString());
+                User newUser = new User(email.getText().toString(), password.getText().toString(), 2, firstName.getText().toString(), lastName.getText().toString(), contactNo.getText().toString(),
+                        streetNum.getText().toString(), streetName.getText().toString(), suburb.getText().toString(), postcode.getText().toString(), businessName.getText().toString());
                 db.insertUser(newUser);
 
             } else {
-                User newUser = new User(email.getText().toString(), password.getText().toString(), 1, firstName.getText().toString(), lastName.getText().toString(),
-                        streetNum.getText().toString(), streetName.getText().toString(), suburb.getText().toString(), postcode.getText().toString());
+                User newUser = new User(email.getText().toString(), password.getText().toString(), 1, firstName.getText().toString(), lastName.getText().toString(), contactNo.getText().toString(),
+                        streetNum.getText().toString(), streetName.getText().toString(), suburb.getText().toString(), postcode.getText().toString(), null);
                 db.insertUser(newUser);
             }
                Intent i = new Intent(getApplicationContext(), LoginActivity.class);

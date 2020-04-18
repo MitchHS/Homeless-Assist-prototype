@@ -49,6 +49,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/suburb" />
 
+        <EditText
+            android:id="@+id/contactNo"
+            android:layout_width="254dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="28dp"
+            android:ems="10"
+            android:hint="contact No"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postcode" />
+
+        <EditText
+            android:id="@+id/businessName"
+            android:layout_width="254dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="28dp"
+            android:ems="10"
+            android:hint="Business Name"
+            android:inputType="textPersonName"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contactNo" />
+
         <CheckBox
             android:id="@+id/busiBox"
             android:layout_width="wrap_content"
@@ -159,12 +184,12 @@
             android:id="@+id/registerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="148dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginStart="121dp"
+            android:layout_marginTop="28dp"
             android:onClick="registerClick"
             android:text="register"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/postcode" />
+            app:layout_constraintTop_toBottomOf="@+id/businessName" />
 
         <EditText
             android:id="@+id/firstName"

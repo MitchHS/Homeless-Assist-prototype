@@ -34,7 +34,7 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner2);
+        Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.resources, android.R.layout.simple_spinner_item);

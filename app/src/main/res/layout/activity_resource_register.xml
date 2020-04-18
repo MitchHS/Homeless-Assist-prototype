@@ -4,35 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1700BCD4"
     tools:context=".ResourceRegisterActivity">
-
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="20dp"
-        android:text="submit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quantityEdit" />
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="246dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="80dp"
-
-        android:layout_marginTop="4dp"
-        android:prompt="@string/resource_prompt"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryTv" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="211dp"
         android:layout_height="49dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="52dp"
         android:text="Submit a resource."
         android:textColor="#0E0D0D"
         android:textSize="24sp"
@@ -43,30 +23,45 @@
         android:id="@+id/categoryTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="48dp"
         android:text="@string/resource_prompt"
         android:textColor="#0E0D0D"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="246dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="88dp"
+
+        android:layout_marginTop="4dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:prompt="@string/resource_prompt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoryTv" />
 
     <TextView
         android:id="@+id/descTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="48dp"
+        android:text="Enter a description"
         android:textColor="#171515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2"
+        app:layout_constraintTop_toBottomOf="@+id/categorySpinner"
         tools:text="Enter a description" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/descEdit"
         android:layout_width="238dp"
         android:layout_height="109dp"
         android:layout_marginStart="84dp"
         android:layout_marginTop="9dp"
+        android:background="#FFFFFF"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/resource_description"
@@ -74,26 +69,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descTv" />
 
+    <TextView
+        android:id="@+id/quantityTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="48dp"
+        android:text="Enter a quantity:"
+        android:textColor="#070606"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adressEdit" />
+
     <EditText
         android:id="@+id/quantityEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Quantity"
+        android:hint="Quantity"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/quantityTv" />
 
-    <TextView
-        android:id="@+id/textView5"
+    <EditText
+        android:id="@+id/adressEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="44dp"
-        android:text="Enter a quantity:"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="7dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="Address"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/addresTv" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="12dp"
+        android:text="submit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantityEdit" />
+
+    <TextView
+        android:id="@+id/addresTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="48dp"
+        android:text="Address to claim item/s"
+        android:textColor="#0C0B0B"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descEdit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,6 +35,14 @@ public class Resource {
         this.userID = userID;
     }
 
+    @Override
+    public String toString()
+    {
+        String ret = getId() + " " + getType() + " "  + getPlaceID() + " " + getAddress() + " "  + getQuantity() + " "
+                + getUserID() + " "  + getDescription() + " "  + getBusinessName();
+        return ret;
+    }
+
 
 
 

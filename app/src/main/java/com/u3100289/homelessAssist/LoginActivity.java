@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -59,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         boolean login = db.userLogin(email.getText().toString().toLowerCase(), password.getText().toString());
-        boolean exists = db.userExists(email.getText().toString());
+        boolean exists = db.userExists(email.getText().toString().toLowerCase());
 
         if(exists && login)
         {
@@ -78,6 +79,29 @@ public class LoginActivity extends AppCompatActivity {
 //            Toast toast = Toast.makeText(context, text, duration);
 //            toast.show();
         }
+
+        if(!exists && !login)
+        {
+            TextView error = findViewById(R.id.errorTV);
+            error.setText("Email or password incorrect");
+            error.setVisibility(View.VISIBLE);
+        }
+
+        if(!exists)
+        {
+            TextView error = findViewById(R.id.errorTV);
+            error.setText("Email not registered");
+            error.setVisibility(View.VISIBLE);
+        }
+
+        if(!login)
+        {
+            TextView error = findViewById(R.id.errorTV);
+            error.setText("Incorrect password");
+            error.setVisibility(View.VISIBLE);
+        }
+
+
 
 
 

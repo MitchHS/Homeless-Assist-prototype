@@ -153,6 +153,12 @@ public class User implements Parcelable {
         dest.writeString(businessName);
     }
 
+    public String getAddress ()
+    {
+        String ret = getStreetNumber() + " "  + getStreetName() + " " + getSuburb();
+        return ret;
+    }
+
     @SuppressWarnings("unused")
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
         @Override

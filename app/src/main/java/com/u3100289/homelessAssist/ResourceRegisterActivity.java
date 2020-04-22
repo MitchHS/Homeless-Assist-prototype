@@ -10,13 +10,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.LocationBias;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
@@ -80,22 +83,43 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
     {
         // Initialize the SDK
         Places.initialize(getApplicationContext(), "AIzaSyB-xVQy82Wj0-WneALqfcL0C4PKSYolJsI");
+        Bundle data = getIntent().getExtras();
+        User user = (User) data.getParcelable("user");
 
         // Create a new Places client instance
         PlacesClient placesClient = Places.createClient(this);
 
         int AUTOCOMPLETE_REQUEST_CODE = 1;
-// Set the fields to specify which types of place data to
-// return after the user has made a selection.
+        // Set the fields to specify which types of place data to
+     // return after the user has made a selection.
        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS);
-// Start the autocomplete intent.
-        Intent intent = new Autocomplete.IntentBuilder(
-                AutocompleteActivityMode.OVERLAY, fields)
-                .build(this);
+    // Start the autocomplete intent.
+        CheckBox useAddress = findViewById(R.id.useAddressCB);
 
-        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+        if(useAddress.isChecked()) {
+            Intent intent = new Autocomplete.IntentBuilder(
+                    AutocompleteActivityMode.OVERLAY, fields)
+                    .setTypeFilter(TypeFilter.ADDRESS)
+                    .setInitialQuery(user.getAddress())
+                    .build(this);
+            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+        } else
+            {
+                LocationBias locationBias = "Canberra";
+                Intent intent = new Autocomplete.IntentBuilder(
+                        AutocompleteActivityMode.OVERLAY, fields)
+                        .setTypeFilter(TypeFilter.GEOCODE)
+                        .setCountry("Australia")
+                        .setLocationBias("gg")
+                        .build(this);
+                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+            }
+
+
 
     }
+
+    public String placeID;
    public int AUTOCOMPLETE_REQUEST_CODE = 1;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -103,6 +127,7 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
+                placeID = place.getId();
 
                 EditText edit = findViewById(R.id.addressEdit);
                 edit.setText(place.getAddress());
@@ -131,7 +156,7 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         Bundle data = getIntent().getExtras();
         User user = (User) data.getParcelable("user");
 
-        Resource res = new Resource(selection, description.getText().toString(), "placeID", address.getText().toString(),
+        Resource res = new Resource(selection, description.getText().toString(), placeID, address.getText().toString(),
                 Integer.parseInt(quantity.getText().toString()), user.getBusinessName(), user.getId());
 
 

@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), ResourceRegisterActivity.class);
             i.putExtra("user", user );
             startActivity(i);
+            db.close();
         }
 
         if(!exists && !login)
@@ -98,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
             error.setText("Incorrect password");
             error.setVisibility(View.VISIBLE);
         }
+
 
 
     }

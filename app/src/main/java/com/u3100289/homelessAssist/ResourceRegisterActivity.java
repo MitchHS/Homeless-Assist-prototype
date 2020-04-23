@@ -165,6 +165,7 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         // Testing
         i.putExtra("placeID", placeIDS);
         startActivity(i);
+        db.close();
 
 
 

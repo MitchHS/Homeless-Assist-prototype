@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -55,46 +57,73 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Create a new Places client instance
         PlacesClient placesClient = Places.createClient(this);
+        LatLngBounds.Builder latBuilder = new LatLngBounds.Builder();
+        LatLng tmp ;
+        Thread thread = new Thread() {
+            public void run() {
 
-        for(int x = 0; x < placeIDS.size(); x++) {
-            // Define a Place ID.
-            String placeId = placeIDS.get(x);
 
-            // Specify the fields to return.
-            List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS);
+                for (int x = 0; x < placeIDS.size(); x++) {
+                    // Define a Place ID.
+                    String placeId = placeIDS.get(x);
 
-            // Construct a request object, passing the place ID and fields array.
-            FetchPlaceRequest request = FetchPlaceRequest.newInstance(placeId, placeFields);
+                    // Specify the fields to return.
+                    List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS);
 
-            placesClient.fetchPlace(request).addOnSuccessListener((response) -> {
-                Place place = response.getPlace();
-                // placeLatLng.set(place.getLatLng());
-                mMap = googleMap;
+                    // Construct a request object, passing the place ID and fields array.
+                    FetchPlaceRequest request = FetchPlaceRequest.newInstance(placeId, placeFields);
 
-                // Add a marker in Sydney and move the camera
-                // Add marker
-                mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title("Resource in Canberra"));
+                    placesClient.fetchPlace(request).addOnSuccessListener((response) -> {
+                        Place place = response.getPlace();
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 10.0f));
-                Log.i(TAG, "Place found: " + place.getLatLng().toString());
-            }).addOnFailureListener((exception) -> {
-                if (exception instanceof ApiException) {
-                    ApiException apiException = (ApiException) exception;
-                    int statusCode = apiException.getStatusCode();
-                    // Handle error with given status code.
-                    Log.e(TAG, "Place not found: " + exception.getMessage());
+                        mMap = googleMap;
+
+
+                        // Add marker
+                        mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title("Resource in Canberra"));
+                       latBuilder.include(place.getLatLng());
+
+                      //  LatLngBounds bounds =  latBuilder.build();
+//                        int padding = 0; // offset from edges of the map in pixels
+//                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+//                        googleMap.moveCamera(cu);
+
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 10.0f));
+
+                        Log.i(TAG, "Place found: " + place.getLatLng().toString());
+                    }).addOnFailureListener((exception) -> {
+                        if (exception instanceof ApiException) {
+                            ApiException apiException = (ApiException) exception;
+                            int statusCode = apiException.getStatusCode();
+                            // Handle error with given status code.
+                            Log.e(TAG, "Place not found: " + exception.getMessage());
+                        }
+                    });
+
+
+
                 }
-            });
+            }
+        };
 
+
+
+        try {
+            thread.start();
+            thread.join();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-
-
-
+        Log.i(TAG, "END OF THREAD");
     }
 
 
-
-
 }
+
+
+
+
+
 
 

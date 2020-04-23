@@ -10,6 +10,7 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AddressComponent;
 import com.google.android.libraries.places.api.model.AddressComponents;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
@@ -40,6 +41,83 @@ public class RegisterActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+    }
+
+    public void addressClick(View v)
+    {
+        // Initialize the SDK
+        Places.initialize(getApplicationContext(), "AIzaSyB-xVQy82Wj0-WneALqfcL0C4PKSYolJsI");
+        Bundle data = getIntent().getExtras();
+
+
+        // Create a new Places client instance
+        PlacesClient placesClient = Places.createClient(this);
+
+        int AUTOCOMPLETE_REQUEST_CODE = 1;
+        // Set the fields to specify which types of place data to
+        // return after the user has made a selection.
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.ADDRESS_COMPONENTS);
+        // Start the autocomplete intent.
+
+        {
+            // LocationBias locationBias = "Canberra";
+            Intent intent = new Autocomplete.IntentBuilder(
+                    AutocompleteActivityMode.OVERLAY, fields)
+
+
+
+                    .build(this);
+            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+        }
+
+
+    }
+
+    public String placeID;
+    public int AUTOCOMPLETE_REQUEST_CODE = 1;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                CheckBox noPerm = findViewById(R.id.permAddress);
+                if(!noPerm.isChecked()) {
+                    Place place = Autocomplete.getPlaceFromIntent(data);
+                    placeID = place.getId();
+                    AddressComponents addressComp = place.getAddressComponents();
+                    List<AddressComponent> list = addressComp.asList();
+
+                    EditText streetNum = findViewById(R.id.streetNum);
+                    EditText streetName = findViewById(R.id.streetName);
+                    EditText suburb = findViewById(R.id.suburb);
+                    EditText postcode = findViewById(R.id.postcode);
+                    
+                    streetNum.setText(list.get(0).getName());
+                    streetName.setText(list.get(1).getName());
+                    suburb.setText(list.get(2).getName());
+                    postcode.setText(list.get(list.size() - 1).getName());
+                } else {
+                    Place place = Autocomplete.getPlaceFromIntent(data);
+                    placeID = place.getId();
+                    AddressComponents addressComp = place.getAddressComponents();
+                    List<AddressComponent> list = addressComp.asList();
+
+                    EditText suburb = findViewById(R.id.suburb);
+                    EditText postcode = findViewById(R.id.postcode);
+
+                    suburb.setText(list.get(0).getName());
+                    postcode.setText(list.get(list.size() - 1).getName());
+                }
+
+
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
     }
 
 

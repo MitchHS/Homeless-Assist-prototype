@@ -68,7 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     String placeId = placeIDS.get(x);
 
                     // Specify the fields to return.
-                    List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS);
+                    List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.ADDRESS_COMPONENTS);
 
                     // Construct a request object, passing the place ID and fields array.
                     FetchPlaceRequest request = FetchPlaceRequest.newInstance(placeId, placeFields);
@@ -91,6 +91,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 10.0f));
 
                         Log.i(TAG, "Place found: " + place.getLatLng().toString());
+                        Log.i(TAG, "Address comp: " + place.getAddressComponents());
                     }).addOnFailureListener((exception) -> {
                         if (exception instanceof ApiException) {
                             ApiException apiException = (ApiException) exception;

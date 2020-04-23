@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=B7:0D:26:81:C0:4C:C7:2E:3A:A1:C5:0C:64:F6:8B:AB:0F:1C:EB:72%3Bcom.u3100289.homelessAssist
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    com.u3100289.homelessAssist
+
+    SHA-1 certificate fingerprint:
+    B7:0D:26:81:C0:4C:C7:2E:3A:A1:C5:0C:64:F6:8B:AB:0F:1C:EB:72
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyB-xVQy82Wj0-WneALqfcL0C4PKSYolJsI</string>
+</resources>

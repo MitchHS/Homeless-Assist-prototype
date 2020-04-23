@@ -56,14 +56,9 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         spinner.setAdapter(adapter);
 
 
-        ArrayList<Resource> test = db.getAllResources();
-      //  String text = test.get(0).getDescription();
-       // String text =  spinner.getSelectedItem().toString();
-        int duration = Toast.LENGTH_SHORT;
-        Context context = this.getApplicationContext();
-       // String text = user.getBusinessName();
-//        Toast toast = Toast.makeText(context, text, duration);
-//        toast.show();
+       EditText addressEdit = findViewById(R.id.addressEdit);
+      addressEdit.setKeyListener(null);
+
 
 
     }
@@ -92,7 +87,7 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         int AUTOCOMPLETE_REQUEST_CODE = 1;
         // Set the fields to specify which types of place data to
      // return after the user has made a selection.
-       List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS);
+       List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
     // Start the autocomplete intent.
         CheckBox useAddress = findViewById(R.id.useAddressCB);
 
@@ -105,12 +100,12 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
         } else
             {
-                LocationBias locationBias = "Canberra";
+               // LocationBias locationBias = "Canberra";
                 Intent intent = new Autocomplete.IntentBuilder(
                         AutocompleteActivityMode.OVERLAY, fields)
-                        .setTypeFilter(TypeFilter.GEOCODE)
-                        .setCountry("Australia")
-                        .setLocationBias("gg")
+                        .setTypeFilter(TypeFilter.ADDRESS)
+
+                      //  .setLocationBias("gg")
                         .build(this);
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
             }
@@ -159,19 +154,22 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         Resource res = new Resource(selection, description.getText().toString(), placeID, address.getText().toString(),
                 Integer.parseInt(quantity.getText().toString()), user.getBusinessName(), user.getId());
 
+        db.insertResource(res);
 
-        ArrayList<Resource> test = db.getAllResources();
-        // String text = test.get(1).getDescription();
+
+        ArrayList<Resource> allResources = db.getAllResources();
+
+         String text = allResources.toString();
        //String text = res.toString();
 
 
 
 //
-//        int duration = Toast.LENGTH_SHORT;
-//        Context context = this.getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Context context = this.getApplicationContext();
 //        // String text = user.getBusinessName();
-//        Toast toast = Toast.makeText(context, text, duration);
-//        toast.show();
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
 
 
 

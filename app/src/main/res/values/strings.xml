@@ -25,6 +25,7 @@
     <string name="resource_prompt">Select a category</string>
     <string name="resource_description">Enter a description here. Provide as much relevant information as possible</string>
 
+    <string name="title_activity_maps">Map</string>
     <string-array name="resources">
         <item>Choose a category</item>
         <item>Food</item>

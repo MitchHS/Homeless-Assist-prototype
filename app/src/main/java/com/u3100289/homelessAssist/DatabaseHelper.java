@@ -149,9 +149,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
             String id = cs.getString(cs.getColumnIndex(USER_COLUMN_ID));
-            String emailTmp = cs.getString(cs.getColumnIndex(USER_COLUMN_EMAIL));
-            String passwordTmp = cs.getString(cs.getColumnIndex(USER_COLUMN_PASSWORD));
-            String nme = cs.getString(cs.getColumnIndex(USER_COLUMN_NAME));
+        String emailTmp = cs.getString(cs.getColumnIndex(USER_COLUMN_EMAIL));
+        String passwordTmp = cs.getString(cs.getColumnIndex(USER_COLUMN_PASSWORD));
+        String nme = cs.getString(cs.getColumnIndex(USER_COLUMN_NAME));
             String lastName = cs.getString(cs.getColumnIndex(USER_COLUMN_LASTNAME));
             String streetNo = cs.getString(cs.getColumnIndex(USER_COLUMN_STREET_NUMBER));
             String streetName = cs.getString(cs.getColumnIndex(USER_COLUMN_STREET_NAME));

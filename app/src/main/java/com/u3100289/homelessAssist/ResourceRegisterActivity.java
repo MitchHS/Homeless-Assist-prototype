@@ -41,25 +41,16 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource_register);
 
-        Bundle data = getIntent().getExtras();
-        User user = (User) data.getParcelable("user");
-
-        DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
-
         Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.resources, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+    // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+    // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-
 
        EditText addressEdit = findViewById(R.id.addressEdit);
       addressEdit.setKeyListener(null);
-
-
 
     }
 
@@ -72,6 +63,16 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
+    }
+
+    public void useAddressChecked(View v)
+    {
+        CheckBox useAddress = findViewById(R.id.useAddressCB);
+        if(useAddress.isChecked())
+        {
+            EditText edit = findViewById(R.id.addressEdit);
+            edit.performClick();
+        }
     }
 
     public void addressClick(View v)
@@ -89,8 +90,8 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
      // return after the user has made a selection.
        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
     // Start the autocomplete intent.
-        CheckBox useAddress = findViewById(R.id.useAddressCB);
 
+        CheckBox useAddress = findViewById(R.id.useAddressCB);
         if(useAddress.isChecked()) {
             Intent intent = new Autocomplete.IntentBuilder(
                     AutocompleteActivityMode.OVERLAY, fields)
@@ -137,8 +138,6 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
     }
 
 
-
-
     public void submitClick(View v)
     {
         DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
@@ -157,7 +156,6 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
       String resourceID =  db.insertResource(res);
       Resource dbResource = db.getResourceById(Long.parseLong(resourceID));
       ArrayList<String> placeIDS = new ArrayList<>();
-      //placeIDS.add("ChIJQcvS7fZUFmsRPRI2uePX2k0");
         placeIDS.add(dbResource.getPlaceID());
 
         Intent i = new Intent(getApplicationContext(), MapsActivity.class);

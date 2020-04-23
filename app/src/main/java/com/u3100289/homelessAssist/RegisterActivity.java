@@ -40,6 +40,16 @@ public class RegisterActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        EditText streetNum = findViewById(R.id.streetNum);
+        EditText streetName = findViewById(R.id.streetName);
+        EditText suburb = findViewById(R.id.suburb);
+        EditText postcode = findViewById(R.id.postcode);
+
+        streetName.setKeyListener(null);
+        streetNum.setKeyListener(null);
+        suburb.setKeyListener(null);
+        postcode.setKeyListener(null);
+
 
     }
 
@@ -48,7 +58,6 @@ public class RegisterActivity extends AppCompatActivity {
         // Initialize the SDK
         Places.initialize(getApplicationContext(), "AIzaSyB-xVQy82Wj0-WneALqfcL0C4PKSYolJsI");
         Bundle data = getIntent().getExtras();
-
 
         // Create a new Places client instance
         PlacesClient placesClient = Places.createClient(this);
@@ -63,8 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
             // LocationBias locationBias = "Canberra";
             Intent intent = new Autocomplete.IntentBuilder(
                     AutocompleteActivityMode.OVERLAY, fields)
-
-
 
                     .build(this);
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
@@ -91,24 +98,69 @@ public class RegisterActivity extends AppCompatActivity {
                     EditText streetName = findViewById(R.id.streetName);
                     EditText suburb = findViewById(R.id.suburb);
                     EditText postcode = findViewById(R.id.postcode);
-                    
-                    streetNum.setText(list.get(0).getName());
-                    streetName.setText(list.get(1).getName());
-                    suburb.setText(list.get(2).getName());
-                    postcode.setText(list.get(list.size() - 1).getName());
+
+                    for(int x = 0; x < list.size(); x ++)
+                    {
+                        switch(list.get(x).getTypes().toString())
+                        {
+                            case "[locality, political]":
+                                suburb.setText(list.get(x).getName());
+                                break;
+
+                            case "[postal_code]":
+                                postcode.setText(list.get(x).getName());
+                                break;
+
+                            case "[street_number]":
+                                    streetNum.setText(list.get(x).getName());
+                                    break;
+
+                            case "[route]":
+                                streetName.setText(list.get(x).getName());
+                                break;
+
+                            default:
+                                System.out.println("Not found" + list.get(x).getTypes().toString());
+
+                        }
+                    }
+
                 } else {
                     Place place = Autocomplete.getPlaceFromIntent(data);
                     placeID = place.getId();
                     AddressComponents addressComp = place.getAddressComponents();
                     List<AddressComponent> list = addressComp.asList();
-
+                    EditText streetNum = findViewById(R.id.streetNum);
+                    EditText streetName = findViewById(R.id.streetName);
                     EditText suburb = findViewById(R.id.suburb);
                     EditText postcode = findViewById(R.id.postcode);
+                    System.out.println("LIST " + (list.toString()));
+                    System.out.println("TYPE" + list.get(0).getTypes());
+                    for(int x = 0; x < list.size(); x ++) {
+                        switch (list.get(x).getTypes().toString()) {
+                            case "[locality, political]":
+                                suburb.setText(list.get(x).getName());
+                                break;
 
-                    suburb.setText(list.get(0).getName());
-                    postcode.setText(list.get(list.size() - 1).getName());
+                            case "[postal_code]":
+                                postcode.setText(list.get(x).getName());
+                                break;
+
+                            case "[street_number]":
+                                streetNum.setText(list.get(x).getName());
+                                break;
+
+                            case "[route]":
+                                streetName.setText(list.get(x).getName());
+                                break;
+
+                            default:
+                                System.out.println("Not found" + list.get(x).getTypes().toString());
+
+                        }
+                    }
+//
                 }
-
 
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 // TODO: Handle the error.
@@ -127,24 +179,22 @@ public class RegisterActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         CheckBox noAddress = findViewById(R.id.permAddress);
         CheckBox isBusiness = findViewById(R.id.busiBox);
+        EditText streetName = findViewById(R.id.streetName);
+        EditText streetNum = findViewById(R.id.streetNum);
+        EditText suburb = findViewById(R.id.suburb);
+        EditText postcode = findViewById(R.id.postcode);
+        TextView noAddressTv = findViewById(R.id.permAddressTv);
+        TextView addressTv = findViewById(R.id.addressTv);
+        EditText businessName = findViewById(R.id.businessName);
         if(noAddress.isChecked()){
 //            setContentView(R.layout.content_register2);
-            EditText streetName = findViewById(R.id.streetName);
             streetName.setVisibility(View.GONE);
+            streetNum.setVisibility(v.GONE);
 
-            EditText suburb = findViewById(R.id.streetNum);
-            suburb.setVisibility(v.GONE);
-
-            TextView noAddressTv = findViewById(R.id.permAddressTv);
             noAddressTv.setVisibility(v.VISIBLE);
             noAddressTv.setTextColor(Color.RED);
-
-            TextView addressTv = findViewById(R.id.addressTv);
             addressTv.setVisibility(v.GONE);
-
-            EditText businessName = findViewById(R.id.businessName);
             businessName.setVisibility(View.GONE);
-
 
             if(isBusiness.isChecked() && noAddress.isChecked())
             {
@@ -153,22 +203,26 @@ public class RegisterActivity extends AppCompatActivity {
                 int duration = Toast.LENGTH_LONG;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+            }
 
+            if(!isBusiness.isChecked())
+            {
+                streetName.clearComposingText();
+                streetNum.clearComposingText();
+                suburb.clearComposingText();
+                postcode.clearComposingText();
             }
         }
 
         if(!noAddress.isChecked()){
-//            setContentView(R.layout.content_register2);
             EditText streetNo = findViewById(R.id.streetNum);
             streetNo.setVisibility(View.VISIBLE);
-            EditText streetName = findViewById(R.id.streetName);
+            streetNo.clearComposingText();
             streetName.setVisibility(View.VISIBLE);
-            EditText suburb = findViewById(R.id.suburb);
+            streetName.clearComposingText();
             suburb.setVisibility(v.VISIBLE);
-            TextView noAddressTv = findViewById(R.id.permAddressTv);
+            suburb.clearComposingText();
             noAddressTv.setVisibility(v.GONE);
-
-            TextView addressTv = findViewById(R.id.addressTv);
             addressTv.setVisibility(v.VISIBLE);
         }
 

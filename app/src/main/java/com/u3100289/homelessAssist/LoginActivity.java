@@ -70,19 +70,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-            Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+            Intent i = new Intent(getApplicationContext(), ResourceRegisterActivity.class);
             i.putExtra("user", user );
-
             startActivity(i);
-//            int duration = Toast.LENGTH_SHORT;
-//
-//            Toast toast = Toast.makeText(context, text, duration);
-//            toast.show();
         }
 
         if(!exists && !login)
         {
             TextView error = findViewById(R.id.errorTV);
+            error.clearComposingText();
             error.setText("Email or password incorrect");
             error.setVisibility(View.VISIBLE);
         }
@@ -90,19 +86,18 @@ public class LoginActivity extends AppCompatActivity {
         if(!exists)
         {
             TextView error = findViewById(R.id.errorTV);
+            error.clearComposingText();
             error.setText("Email not registered");
             error.setVisibility(View.VISIBLE);
         }
 
-        if(!login)
+        if(!login && exists == true)
         {
             TextView error = findViewById(R.id.errorTV);
+            error.clearComposingText();
             error.setText("Incorrect password");
             error.setVisibility(View.VISIBLE);
         }
-
-
-
 
 
     }

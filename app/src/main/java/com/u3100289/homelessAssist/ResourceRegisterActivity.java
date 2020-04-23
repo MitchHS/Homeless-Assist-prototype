@@ -154,23 +154,17 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         Resource res = new Resource(selection, description.getText().toString(), placeID, address.getText().toString(),
                 Integer.parseInt(quantity.getText().toString()), user.getBusinessName(), user.getId());
 
-        db.insertResource(res);
+      String resourceID =  db.insertResource(res);
+      Resource dbResource = db.getResourceById(Long.parseLong(resourceID));
+      ArrayList<String> placeIDS = new ArrayList<>();
+      //placeIDS.add("ChIJQcvS7fZUFmsRPRI2uePX2k0");
+        placeIDS.add(dbResource.getPlaceID());
 
-
-        ArrayList<Resource> allResources = db.getAllResources();
-
-         String text = allResources.toString();
-       //String text = res.toString();
-
-
-
-//
-        int duration = Toast.LENGTH_SHORT;
-        Context context = this.getApplicationContext();
-//        // String text = user.getBusinessName();
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
+        Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+        i.putExtra("user", user );
+        // Testing
+        i.putExtra("placeID", placeIDS);
+        startActivity(i);
 
 
 

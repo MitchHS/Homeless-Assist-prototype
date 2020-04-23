@@ -1,6 +1,9 @@
 package com.u3100289.homelessAssist;
 
-public class Resource {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Resource implements Parcelable {
 
     String id = "-1";
     String type;
@@ -55,4 +58,45 @@ public class Resource {
     public String getDescription() {return this.description;}
     public String getBusinessName() {return this.businessName;}
 
+
+    protected Resource(Parcel in) {
+        id = in.readString();
+        type = in.readString();
+        description = in.readString();
+        placeID = in.readString();
+        address = in.readString();
+        quanity = in.readInt();
+        userID = in.readString();
+        businessName = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(type);
+        dest.writeString(description);
+        dest.writeString(placeID);
+        dest.writeString(address);
+        dest.writeInt(quanity);
+        dest.writeString(userID);
+        dest.writeString(businessName);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Resource> CREATOR = new Parcelable.Creator<Resource>() {
+        @Override
+        public Resource createFromParcel(Parcel in) {
+            return new Resource(in);
+        }
+
+        @Override
+        public Resource[] newArray(int size) {
+            return new Resource[size];
+        }
+    };
 }

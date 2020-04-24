@@ -118,12 +118,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public ArrayList<Resource> resourceQuery(String type, String suburb, String businessType)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Resource> results = new ArrayList<>();
+        Cursor cs = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,
+                        RESOURCE_COLUMN_SUBURB, RESOURCE_COLUMN_QUANTITY, USER_COLUMN_BUSINESS_NAME, RESOURCE_COLUMN_USERID}, RESOURCE_COLUMN_TYPE + "=" + "'" + type + "'" +
+                "AND "  + RESOURCE_COLUMN_SUBURB + "=" + "'"+ suburb + "'" + "AND " + USER_COLUMN_BUSINESS_NAME + "=" + "'" + businessType + "'", null,
+                null, null, null );
+
+        cs.moveToFirst();
+        while(cs.isAfterLast() == false) {
+            String idRet = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_ID));
+            String retType = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_TYPE));
+            String description = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_DESCRIPTION));
+            String placeID = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_PLACEID));
+            String address = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_SUBURB));
+            String quantity = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_QUANTITY));
+            String creatorID = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_USERID));
+            String businessName = cs.getString(cs.getColumnIndex(USER_COLUMN_BUSINESS_NAME));
+
+            Resource res = new Resource(idRet, retType, description, placeID, address, Integer.parseInt(quantity), businessName, creatorID);
+            results.add(res);
+        }
+
+        return results;
+
+
+    }
+
     public User getUser (String email, String password) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cs = db.query(USER_TABLE_NAME, new String[]{USER_COLUMN_ID, USER_COLUMN_EMAIL, USER_COLUMN_PASSWORD, USER_COLUMN_TYPE, USER_COLUMN_NAME, USER_COLUMN_LASTNAME,
-        USER_COLUMN_STREET_NUMBER, USER_COLUMN_STREET_NAME, USER_COLUMN_SUBURB, USER_COLUMN_POSTCODE, USER_COLUMN_CONTACTNO, USER_COLUMN_BUSINESS_NAME}, USER_COLUMN_EMAIL + "=" + "'" + email + "'" + "AND " + USER_COLUMN_PASSWORD + "=" + "'" +
+        USER_COLUMN_STREET_NUMBER, USER_COLUMN_STREET_NAME, USER_COLUMN_SUBURB, USER_COLUMN_POSTCODE, USER_COLUMN_CONTACTNO, USER_COLUMN_BUSINESS_NAME}, USER_COLUMN_EMAIL +
+                "=" + "'" + email + "'" + "AND " + USER_COLUMN_PASSWORD + "=" + "'" +
                 password + "'", null, null, null, null);
 
         cs.moveToFirst();

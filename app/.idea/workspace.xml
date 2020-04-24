@@ -10,19 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e00dd355-7186-4ef7-9096-641cf0dadc4b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/DatabaseHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/DatabaseHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/MapsActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/QueryResourceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/QueryResourceActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/RegisterActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/Resource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/ResourceRegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/ResourceRegisterActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_query_resource.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_query_resource.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

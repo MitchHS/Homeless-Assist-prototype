@@ -24,17 +24,17 @@ public class QueryResourceActivity extends AppCompatActivity {
         ArrayList<Resource> allResources = db.getAllResources();
         ArrayList<String> suburbs = new ArrayList<>();
         suburbs.add("All");
-        // Init the all query
+        // Init the all suburbs for 
         for(int x = 0; x < allResources.size(); x++)
         {
             suburbs.add(allResources.get(x).getSuburb());
         }
 
 
-
+        // suburbs
         System.out.println("RESOURCES " + allResources.toString());
-        ArrayAdapter<Resource> adapter2 =
-                new ArrayAdapter<Resource>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, allResources);
+        ArrayAdapter<String> adapter2 =
+                new ArrayAdapter<String>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, suburbs);
         adapter2.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
 
 

@@ -9,40 +9,41 @@ public class Resource implements Parcelable {
     String type;
     String description;
     String placeID;
-    String address;
+    String suburb;
     int quanity;
     String userID; //FK
     String businessName;
 
-    public Resource (String id, String type, String description, String placeID, String address, int quantity, String businessName, String userID)
+    public Resource (String id, String type, String description, String placeID, String suburb, int quantity, String businessName, String userID)
     {
         this.id = id;
         this.type = type;
         this.description = description;
         this.placeID = placeID;
-        this.address = address;
+        this.suburb = suburb;
         this.quanity = quantity;
         this.businessName = businessName;
         this.userID = userID;
     }
 
-    public Resource (String type, String description, String placeID, String address, int quantity, String businessName, String userID)
+    public Resource (String type, String description, String placeID, String suburb, int quantity, String businessName, String userID)
     {
 
         this.type = type;
         this.description = description;
         this.placeID = placeID;
-        this.address = address;
+        this.suburb = suburb;
         this.quanity = quantity;
         this.businessName = businessName;
         this.userID = userID;
     }
 
+
+
     @Override
     public String toString()
     {
-        String ret = getId() + " " + getType() + " "  + getPlaceID() + " " + getAddress() + " "  + getQuantity() + " "
-                + getUserID() + " "  + getDescription() + " "  + getBusinessName();
+        String ret = getType() + " " + getDescription() + " " + getSuburb();
         return ret;
     }
 
@@ -52,7 +53,7 @@ public class Resource implements Parcelable {
     public String getId() {return this.id;}
     public String getType() {return this.type;}
     public String getPlaceID() {return this.placeID;}
-    public String getAddress() {return this.address;}
+    public String getSuburb() {return this.suburb;}
     public int getQuantity() {return this.quanity;}
     public String getUserID() {return this.userID;}
     public String getDescription() {return this.description;}
@@ -64,7 +65,7 @@ public class Resource implements Parcelable {
         type = in.readString();
         description = in.readString();
         placeID = in.readString();
-        address = in.readString();
+        suburb = in.readString();
         quanity = in.readInt();
         userID = in.readString();
         businessName = in.readString();
@@ -81,7 +82,7 @@ public class Resource implements Parcelable {
         dest.writeString(type);
         dest.writeString(description);
         dest.writeString(placeID);
-        dest.writeString(address);
+        dest.writeString(suburb);
         dest.writeInt(quanity);
         dest.writeString(userID);
         dest.writeString(businessName);

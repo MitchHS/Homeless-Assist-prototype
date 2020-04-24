@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-            Intent i = new Intent(getApplicationContext(), ResourceRegisterActivity.class);
+            Intent i = new Intent(getApplicationContext(), QueryResourceActivity.class);
             i.putExtra("user", user );
             startActivity(i);
             db.close();

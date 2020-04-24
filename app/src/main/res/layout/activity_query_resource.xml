@@ -7,19 +7,30 @@
     tools:context=".QueryResourceActivity">
 
     <Spinner
-        android:id="@+id/spinner3"
-        android:layout_width="157dp"
-        android:layout_height="53dp"
+        android:id="@+id/suburbSpinner"
+        android:layout_width="111dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="64dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/businessTypeSpinner"
+        app:layout_constraintStart_toEndOf="@+id/typeSpinner"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/businessTypeSpinner"
+        android:layout_width="111dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="157dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="20dp"
+        android:id="@+id/typeSpinner"
+        android:layout_width="111dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="64dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

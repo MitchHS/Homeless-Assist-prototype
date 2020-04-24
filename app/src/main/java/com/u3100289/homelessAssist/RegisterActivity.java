@@ -6,10 +6,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AddressComponent;
 import com.google.android.libraries.places.api.model.AddressComponents;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
@@ -67,12 +69,15 @@ public class RegisterActivity extends AppCompatActivity {
         // return after the user has made a selection.
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.ADDRESS_COMPONENTS);
         // Start the autocomplete intent.
-
+        RectangularBounds bounds = RectangularBounds.newInstance(
+                new LatLng(-35.585757, 149.227334),
+                new LatLng(-35.127816, 149.123940));
         {
             // LocationBias locationBias = "Canberra";
             Intent intent = new Autocomplete.IntentBuilder(
                     AutocompleteActivityMode.OVERLAY, fields)
-
+                    .setLocationBias(bounds)
+                    .setCountry("AU")
                     .build(this);
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
         }

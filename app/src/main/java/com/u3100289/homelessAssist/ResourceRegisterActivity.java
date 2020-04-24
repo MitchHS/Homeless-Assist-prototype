@@ -16,9 +16,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.AddressComponent;
+import com.google.android.libraries.places.api.model.AddressComponents;
 import com.google.android.libraries.places.api.model.LocationBias;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
@@ -88,23 +92,33 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         int AUTOCOMPLETE_REQUEST_CODE = 1;
         // Set the fields to specify which types of place data to
      // return after the user has made a selection.
-       List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
+       List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.ADDRESS_COMPONENTS);
     // Start the autocomplete intent.
+        RectangularBounds bounds = RectangularBounds.newInstance(
+                new LatLng(-35.585757, 149.227334),
+                new LatLng(-35.127816, 149.123940));
 
         CheckBox useAddress = findViewById(R.id.useAddressCB);
         if(useAddress.isChecked()) {
             Intent intent = new Autocomplete.IntentBuilder(
                     AutocompleteActivityMode.OVERLAY, fields)
                     .setTypeFilter(TypeFilter.ADDRESS)
+                    .setCountry("AU")
+                    .setLocationBias(bounds)
                     .setInitialQuery(user.getAddress())
                     .build(this);
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+
+
+
         } else
             {
                // LocationBias locationBias = "Canberra";
                 Intent intent = new Autocomplete.IntentBuilder(
                         AutocompleteActivityMode.OVERLAY, fields)
                         .setTypeFilter(TypeFilter.ADDRESS)
+                        .setCountry("AU")
+                        .setLocationBias(bounds)
 
                       //  .setLocationBias("gg")
                         .build(this);
@@ -116,6 +130,7 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
     }
 
     public String placeID;
+    public String suburb;
    public int AUTOCOMPLETE_REQUEST_CODE = 1;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -124,6 +139,16 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 placeID = place.getId();
+                AddressComponents addressComp = place.getAddressComponents();
+                List<AddressComponent> list = addressComp.asList();
+                for(int x = 0; x < list.size(); x ++)
+                {
+                    if(list.get(x).getTypes().contains("locality"))
+                    {
+                        suburb = list.get(x).getName();
+                    }
+                }
+
 
                 EditText edit = findViewById(R.id.addressEdit);
                 edit.setText(place.getAddress());
@@ -150,7 +175,7 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
         Bundle data = getIntent().getExtras();
         User user = (User) data.getParcelable("user");
 
-        Resource res = new Resource(selection, description.getText().toString(), placeID, address.getText().toString(),
+        Resource res = new Resource(selection, description.getText().toString(), placeID, suburb,
                 Integer.parseInt(quantity.getText().toString()), user.getBusinessName(), user.getId());
 
       String resourceID =  db.insertResource(res);

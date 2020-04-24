@@ -14,7 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String RESOURCE_COLUMN_TYPE = "type";
     public static final String RESOURCE_COLUMN_DESCRIPTION = "description";
     public static final String RESOURCE_COLUMN_PLACEID = "placeId";
-    public static final String RESOURCE_COLUMN_ADDRESS = "address";
+    public static final String RESOURCE_COLUMN_SUBURB = "suburb";
     public static final String RESOURCE_COLUMN_QUANTITY = "quantity";
     public static final String RESOURCE_COLUMN_USERID = "userId"; // FK
 
@@ -63,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 RESOURCE_COLUMN_TYPE + " text, " + // Dropdown box of types in the app
                 RESOURCE_COLUMN_DESCRIPTION + " text, " + // User description of the resource
                 RESOURCE_COLUMN_PLACEID + " text, " + // Google API Place id for street Address
-                RESOURCE_COLUMN_ADDRESS + " text, " + // place.getAddress()
+                RESOURCE_COLUMN_SUBURB + " text, " + // place.getAddress()
                 RESOURCE_COLUMN_QUANTITY + " integer, " + // Available quanity
                 USER_COLUMN_BUSINESS_NAME + " integer, " +
                 RESOURCE_COLUMN_USERID + " integer, " +
@@ -95,7 +95,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     res.getString(res.getColumnIndex(RESOURCE_COLUMN_TYPE)),
                     res.getString(res.getColumnIndex(RESOURCE_COLUMN_DESCRIPTION)),
                     res.getString(res.getColumnIndex(RESOURCE_COLUMN_PLACEID)),
-                    res.getString(res.getColumnIndex(RESOURCE_COLUMN_ADDRESS)),
+                    res.getString(res.getColumnIndex(RESOURCE_COLUMN_SUBURB)),
                     res.getInt(res.getColumnIndex((RESOURCE_COLUMN_QUANTITY))),
                     res.getString(res.getColumnIndex(USER_COLUMN_BUSINESS_NAME)),
                     res.getString(res.getColumnIndex(RESOURCE_COLUMN_USERID)));
@@ -150,7 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cs = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,
-                RESOURCE_COLUMN_ADDRESS, RESOURCE_COLUMN_QUANTITY, USER_COLUMN_BUSINESS_NAME, RESOURCE_COLUMN_USERID}, RESOURCE_COLUMN_ID + "=" + "'" + id + "'", null,
+                        RESOURCE_COLUMN_SUBURB, RESOURCE_COLUMN_QUANTITY, USER_COLUMN_BUSINESS_NAME, RESOURCE_COLUMN_USERID}, RESOURCE_COLUMN_ID + "=" + "'" + id + "'", null,
                 null, null, null );
 
         cs.moveToFirst();
@@ -158,7 +158,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String type = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_TYPE));
         String description = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_DESCRIPTION));
         String placeID = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_PLACEID));
-        String address = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_ADDRESS));
+        String address = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_SUBURB));
         String quantity = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_QUANTITY));
         String creatorID =cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_USERID));
         String businessName = cs.getString(cs.getColumnIndex(USER_COLUMN_BUSINESS_NAME));
@@ -222,7 +222,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(RESOURCE_COLUMN_TYPE, resource.getType());
         contentValues.put(RESOURCE_COLUMN_DESCRIPTION, resource.getDescription());
         contentValues.put(RESOURCE_COLUMN_PLACEID, resource.getPlaceID());
-        contentValues.put(RESOURCE_COLUMN_ADDRESS, resource.getAddress());
+        contentValues.put(RESOURCE_COLUMN_SUBURB, resource.getSuburb());
         contentValues.put(RESOURCE_COLUMN_QUANTITY, resource.getQuantity());
         contentValues.put(USER_COLUMN_BUSINESS_NAME, resource.getBusinessName());
         contentValues.put(RESOURCE_COLUMN_USERID, resource.getUserID());

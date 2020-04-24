@@ -43,7 +43,8 @@ public class Resource implements Parcelable {
     @Override
     public String toString()
     {
-        String ret = getType() + " " + getDescription() + " " + getSuburb();
+        String ret = "Type: " + getType() + " " + "\nDescription: " + getDescription() + "\n" + "Suburb Location: " + getSuburb() + "\nProvided by: "
+                + getBusinessName() + "\nQuantity available: " + getQuantity();
         return ret;
     }
 

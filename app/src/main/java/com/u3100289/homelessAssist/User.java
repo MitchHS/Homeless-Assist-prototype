@@ -96,7 +96,7 @@ public class User implements Parcelable {
     public String getContactNo() {return this.contactNo;}
     public String getBusinessName() {
         if (this.businessName == null) {
-            return "private";
+            return "private user";
         } else {
             return this.businessName.toLowerCase();
         }

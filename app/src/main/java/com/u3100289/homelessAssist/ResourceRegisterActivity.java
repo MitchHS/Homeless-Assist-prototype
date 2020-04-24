@@ -119,8 +119,6 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
                         .setTypeFilter(TypeFilter.ADDRESS)
                         .setCountry("AU")
                         .setLocationBias(bounds)
-
-                      //  .setLocationBias("gg")
                         .build(this);
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
             }
@@ -183,7 +181,7 @@ public class ResourceRegisterActivity extends AppCompatActivity implements Adapt
       ArrayList<String> placeIDS = new ArrayList<>();
         placeIDS.add(dbResource.getPlaceID());
 
-        Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+        Intent i = new Intent(getApplicationContext(), QueryResourceActivity.class);
         i.putExtra("user", user );
         // Testing
         i.putExtra("placeID", placeIDS);

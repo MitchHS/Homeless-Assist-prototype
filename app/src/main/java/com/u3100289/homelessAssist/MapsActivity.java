@@ -39,6 +39,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
+
+
     }
 
     // When map is available
@@ -50,8 +52,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Places.initialize(getApplicationContext(), "AIzaSyB-xVQy82Wj0-WneALqfcL0C4PKSYolJsI");
         Bundle data = getIntent().getExtras();
         User user = (User) data.getParcelable("user");
-        ArrayList<String> placeIDS = data.getStringArrayList("placeID");
-        Resource res = (Resource) data.getParcelable("resource");
+       // ArrayList<String> placeIDS = data.getStringArrayList("placeID");
+        Resource res = (Resource) data.getParcelable("placeID");
         // Log Tag
         String TAG = "Google Maps";
 
@@ -63,9 +65,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void run() {
 
 
-                for (int x = 0; x < placeIDS.size(); x++) {
+//                for (int x = 0; x < placeIDS.size(); x++) {
                     // Define a Place ID.
-                    String placeId = placeIDS.get(x);
+                    String placeId = res.getPlaceID();
 
                     // Specify the fields to return.
                     List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.ADDRESS_COMPONENTS);
@@ -80,7 +82,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                         // Add marker
-                        mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title("Resource in Canberra"));
+                        mMap.addMarker(new MarkerOptions()
+                                .position(place.getLatLng()).title(res.getType())
+                                .snippet("Address: " + place.getAddress() + "\nDescription: " + res.getDescription() + "\nQuantity: " + res.getQuantity())
+                        );
                        latBuilder.include(place.getLatLng());
 
                       //  LatLngBounds bounds =  latBuilder.build();
@@ -102,7 +107,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     });
 
                 }
-            }
+           // }
         };
 
 

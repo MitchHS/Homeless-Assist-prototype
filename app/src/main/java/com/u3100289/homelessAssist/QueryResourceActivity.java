@@ -72,40 +72,34 @@ public class QueryResourceActivity extends Activity {
         setSpinnerListener(businessTypeSpinner);
         setSpinnerListener(suburbSpinner);
 
-       // db.resourceQuery("Food", "Forde", "private user");
+
 
         lv.setClickable(true);
 
-//
 
 
+        // On List click
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = lv.getItemAtPosition(position);
                 Resource res = (Resource) lv.getItemAtPosition(position);
             Intent i = new Intent(getApplicationContext(), MapsActivity.class);
-            ArrayList<String> ids = new ArrayList<>();
-            ids.add(res.placeID);
-            i.putExtra("placeID", ids );
+            i.putExtra("placeID", res );
             startActivity(i);
             }
         });
-
 
     db.close();
 
     }
 
 
-
-
-
     public void updateList(String type, String suburb, String businessType, int suburbPos) {
         DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
         lv = findViewById(R.id.list);
 
-        //TODO: db query for function args (on update selection)
+        // Reset suburb spinner, get new list view resources.
 
         lv.invalidateViews();
         resources = db.resourceQuery(type, suburb, businessType);
@@ -125,16 +119,13 @@ public class QueryResourceActivity extends Activity {
         db.close();
         suburbAdapter.notifyDataSetChanged();
        arrayAdapter.notifyDataSetChanged();
-//         suburbAdapter =
-//                new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, suburbs);
-//        suburbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<Resource> arrayAdapter = new ArrayAdapter<Resource>(
                 this,
                 android.R.layout.simple_list_item_1,
                 resources);
-//
+
         lv.setAdapter(arrayAdapter);
-       // suburbSpinner.setAdapter(suburbAdapter);
+
         if(suburbPos < suburbSpinner.getCount())
         { suburbSpinner.setSelection(suburbPos);}
         setSpinnerListener(suburbSpinner);

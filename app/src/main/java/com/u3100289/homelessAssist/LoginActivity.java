@@ -45,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-            Intent i = new Intent(getApplicationContext(), QueryResourceActivity.class);
-            i.putExtra("placeID", user );
+            Intent i = new Intent(getApplicationContext(), ResourceRegisterActivity.class);
+            i.putExtra("user", user );
             db.close();
             startActivity(i);
 

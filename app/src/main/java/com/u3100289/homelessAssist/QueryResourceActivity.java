@@ -74,6 +74,7 @@ public class QueryResourceActivity extends Activity {
        // db.resourceQuery("Food", "Forde", "private user");
 
         lv.setClickable(true);
+        lv.setNestedScrollingEnabled(true);
 //        lv.setOnItemClickListener((arg0, arg1, position, arg3) -> {
 //
 //

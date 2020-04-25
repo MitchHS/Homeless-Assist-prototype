@@ -51,7 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bundle data = getIntent().getExtras();
         User user = (User) data.getParcelable("user");
         ArrayList<String> placeIDS = data.getStringArrayList("placeID");
-       //  ArrayList<String> placeIDS = new ArrayList<>();
+        Resource res = (Resource) data.getParcelable("resource");
         // Log Tag
         String TAG = "Google Maps";
 

@@ -131,8 +131,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         queryString.add(suburA);
         queryString.add(busiType);
 
-//        String query = RESOURCE_COLUMN_TYPE + "=" + "'" + type + "'" +
-//                "AND "  + RESOURCE_COLUMN_SUBURB + "=" + "'"+ suburb + "'" + "AND " + USER_COLUMN_BUSINESS_NAME + "=" + "'" + businessType + "'";
+        if(!businessType.contains("private user") && !businessType.contains("All"))
+        {
+            int x =  queryString.indexOf(busiType);
+            queryString.remove(x);
+            String newQuery = USER_COLUMN_BUSINESS_NAME + "!=" + "'" + "private user" + "'" + "AND ";
+            queryString.add(newQuery);
+        }
 
 
         if(type.contains("All"))
@@ -153,7 +158,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             System.out.println("CONTAINS BUSI");
             int x = queryString.indexOf(busiType);
-            queryString.remove(x);
+            if(x > -1){ queryString.remove(x);}
+
         }
 
         String query = "";

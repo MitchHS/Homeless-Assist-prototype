@@ -142,21 +142,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if(type.contains("All"))
         {
-         System.out.println("CONTAINS TYPE");
+
           int x =  queryString.indexOf(typeA);
             queryString.remove(x);
         }
 
         if(suburb.contains("All"))
         {
-            System.out.println("CONTAINS SUBURB");
+
           int x = queryString.indexOf(suburA);
           queryString.remove(x);
         }
 
         if(businessType.contains("All"))
         {
-            System.out.println("CONTAINS BUSI");
+
             int x = queryString.indexOf(busiType);
             if(x > -1){ queryString.remove(x);}
 
@@ -170,14 +170,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if(x == queryString.size() -1 || queryString.size() == 1)
             {
                tmp = tmp.replace("AND", "");
-                System.out.println("IS LAST REMOVE: " + tmp);
+
             }
 
             query = query + tmp;
         }
 
-        System.out.println("QUERY: " + query);
-        System.out.println("QURERY ARRAY: " + queryString.toString());
+
 
         if(query.isEmpty()){
             Cursor res = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,
@@ -201,7 +200,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 res.moveToNext();
 
             }
-            res.close();
+
             return resourceList;
         } else {
             Cursor res = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,
@@ -225,11 +224,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 res.moveToNext();
 
             }
-            res.close();
+
             return resourceList;
         }
-
-
 
     }
 

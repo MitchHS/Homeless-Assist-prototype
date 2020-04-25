@@ -1,7 +1,8 @@
 package com.u3100289.homelessAssist;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,11 +11,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.u3100289.homelessAssist.R;
-
 import java.util.ArrayList;
 
-public class QueryResourceActivity extends AppCompatActivity {
+public class QueryResourceActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,20 +22,20 @@ public class QueryResourceActivity extends AppCompatActivity {
         Spinner typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
         Spinner businessTypeSpinner = (Spinner) findViewById(R.id.businessTypeSpinner);
         Spinner suburbSpinner = (Spinner) findViewById(R.id.suburbSpinner);
-        ListView lv = findViewById(R.id.listView);
+        ListView lv = findViewById(R.id.list);
         DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
         ArrayList<Resource> allResources = db.getAllResources();
         ArrayList<String> suburbs = new ArrayList<>();
         suburbs.add("All");
 
-        // Init the all suburbs for 
-        for (int x = 0; x < allResources.size(); x++) {
-            if (suburbs.contains(allResources.get(x).getSuburb())) {
-                continue;
-            } else {
-                suburbs.add(allResources.get(x).getSuburb());
-            }
-        }
+//        // Init the all suburbs for
+//        for (int x = 0; x < allResources.size(); x++) {
+//            if (suburbs.contains(allResources.get(x).getSuburb())) {
+//                continue;
+//            } else {
+//                suburbs.add(allResources.get(x).getSuburb());
+//            }
+//        }
 
         ArrayAdapter<Resource> arrayAdapter = new ArrayAdapter<Resource>(
                 this,
@@ -46,7 +45,7 @@ public class QueryResourceActivity extends AppCompatActivity {
         lv.setAdapter(arrayAdapter);
 
         // suburbs
-        System.out.println("RESOURCES " + allResources.toString());
+
         ArrayAdapter<String> suburbAdapter =
                 new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, suburbs);
         suburbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -62,6 +61,10 @@ public class QueryResourceActivity extends AppCompatActivity {
 
         resourceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+
+
+
+
         // Apply the resourceAdapter to the spinner
         typeSpinner.setAdapter(resourceAdapter);
         businessTypeSpinner.setAdapter(businessAdapater);
@@ -74,36 +77,63 @@ public class QueryResourceActivity extends AppCompatActivity {
 
        // db.resourceQuery("Food", "Forde", "private user");
 
+        lv.setClickable(true);
+        lv.setOnItemClickListener((arg0, arg1, position, arg3) -> {
+
+            Resource res = (Resource) lv.getItemAtPosition(position);
+            Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+            ArrayList<String> ids = new ArrayList<>();
+            ids.add(res.placeID);
+            i.putExtra("placeID", ids );
+            startActivity(i);
+
+
+        });
+
+
+
 
     }
 
-    public void updateList(String type, String suburb, String businessType) {
+
+
+
+
+    public void updateList(String type, String suburb, String businessType, int suburbPos) {
         DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
-        ListView lv = findViewById(R.id.listView);
+        ListView lv = findViewById(R.id.list);
 
 
         //TODO: db query for function args (on update selection)
         ArrayList<Resource> resources = db.resourceQuery(type, suburb, businessType);
+        ArrayList<Resource> suburbQuery = db.resourceQuery(type, "All", businessType);
+        Spinner suburbSpinner = findViewById(R.id.suburbSpinner);
         ArrayList<String> suburbs = new ArrayList<>();
         suburbs.add("All");
 
-        for (int x = 0; x < resources.size(); x++) {
-            if (suburbs.contains(resources.get(x).getSuburb())) {
+        for (int x = 0; x < suburbQuery.size(); x++) {
+            if (suburbs.contains(suburbQuery.get(x).getSuburb())) {
                 continue;
             } else {
-                suburbs.add(resources.get(x).getSuburb());
+                suburbs.add(suburbQuery.get(x).getSuburb());
             }
         }
-
-
-
         db.close();
+        ArrayAdapter<String> suburbAdapter =
+                new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, suburbs);
+        suburbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<Resource> arrayAdapter = new ArrayAdapter<Resource>(
                 this,
                 android.R.layout.simple_list_item_1,
                 resources);
 
         lv.setAdapter(arrayAdapter);
+        suburbSpinner.setAdapter(suburbAdapter);
+        if(suburbPos < suburbSpinner.getCount())
+        { suburbSpinner.setSelection(suburbPos);}
+       // setSpinnerListener(suburbSpinner);
+
+
     }
 
     // Register listener for a spinner
@@ -122,7 +152,7 @@ public class QueryResourceActivity extends AppCompatActivity {
                 }
 
                 updateList(typeSpinner.getSelectedItem().toString(), suburbSpinner.getSelectedItem().toString(),
-                        businessType);
+                        businessType, suburbSpinner.getSelectedItemPosition());
 
 
             }
@@ -134,8 +164,6 @@ public class QueryResourceActivity extends AppCompatActivity {
 
         });
     }
-
-
 
 
 

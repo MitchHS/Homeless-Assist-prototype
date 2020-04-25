@@ -46,8 +46,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
             Intent i = new Intent(getApplicationContext(), QueryResourceActivity.class);
-            i.putExtra("user", user );
+            i.putExtra("placeID", user );
             startActivity(i);
+
 
         }
 
@@ -75,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             error.setVisibility(View.VISIBLE);
         }
 
-
+        db.close();
 
     }
 

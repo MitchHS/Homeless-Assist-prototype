@@ -61,10 +61,6 @@ public class QueryResourceActivity extends Activity {
 
         resourceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
-
-
-
         // Apply the resourceAdapter to the spinner
         typeSpinner.setAdapter(resourceAdapter);
         businessTypeSpinner.setAdapter(businessAdapater);
@@ -78,20 +74,29 @@ public class QueryResourceActivity extends Activity {
        // db.resourceQuery("Food", "Forde", "private user");
 
         lv.setClickable(true);
-        lv.setOnItemClickListener((arg0, arg1, position, arg3) -> {
+//        lv.setOnItemClickListener((arg0, arg1, position, arg3) -> {
+//
+//
+//
+//
+//        });
 
-            Resource res = (Resource) lv.getItemAtPosition(position);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object listItem = lv.getItemAtPosition(position);
+                Resource res = (Resource) lv.getItemAtPosition(position);
             Intent i = new Intent(getApplicationContext(), MapsActivity.class);
             ArrayList<String> ids = new ArrayList<>();
             ids.add(res.placeID);
             i.putExtra("placeID", ids );
             startActivity(i);
-
-
+            }
         });
 
 
-
+    db.close();
 
     }
 
@@ -132,7 +137,7 @@ public class QueryResourceActivity extends Activity {
         if(suburbPos < suburbSpinner.getCount())
         { suburbSpinner.setSelection(suburbPos);}
        // setSpinnerListener(suburbSpinner);
-
+    db.close();
 
     }
 

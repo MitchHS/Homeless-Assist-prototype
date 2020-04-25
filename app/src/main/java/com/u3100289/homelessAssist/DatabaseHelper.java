@@ -200,7 +200,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 res.moveToNext();
 
             }
-
+            db.close();
             return resourceList;
         } else {
             Cursor res = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,
@@ -224,7 +224,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 res.moveToNext();
 
             }
-
+            db.close();
             return resourceList;
         }
 

@@ -71,14 +71,33 @@ public class QueryResourceActivity extends AppCompatActivity {
         setSpinnerListener(typeSpinner);
         setSpinnerListener(businessTypeSpinner);
         setSpinnerListener(suburbSpinner);
+
+       // db.resourceQuery("Food", "Forde", "private user");
+
+
     }
 
     public void updateList(String type, String suburb, String businessType) {
         DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
         ListView lv = findViewById(R.id.listView);
 
+
         //TODO: db query for function args (on update selection)
-        ArrayList<Resource> resources = new ArrayList<Resource>(); /// DB QUERY
+        ArrayList<Resource> resources = db.resourceQuery(type, suburb, businessType);
+        ArrayList<String> suburbs = new ArrayList<>();
+        suburbs.add("All");
+
+        for (int x = 0; x < resources.size(); x++) {
+            if (suburbs.contains(resources.get(x).getSuburb())) {
+                continue;
+            } else {
+                suburbs.add(resources.get(x).getSuburb());
+            }
+        }
+
+
+
+        db.close();
         ArrayAdapter<Resource> arrayAdapter = new ArrayAdapter<Resource>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -96,10 +115,14 @@ public class QueryResourceActivity extends AppCompatActivity {
                 Spinner typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
                 Spinner businessTypeSpinner = (Spinner) findViewById(R.id.businessTypeSpinner);
                 Spinner suburbSpinner = (Spinner) findViewById(R.id.suburbSpinner);
+                String businessType = businessTypeSpinner.getSelectedItem().toString();
+                if(businessType.contains("Private"))
+                {
+                    businessType = "private user";
+                }
 
                 updateList(typeSpinner.getSelectedItem().toString(), suburbSpinner.getSelectedItem().toString(),
-                        businessTypeSpinner.getSelectedItem().toString());
-
+                        businessType);
 
 
             }

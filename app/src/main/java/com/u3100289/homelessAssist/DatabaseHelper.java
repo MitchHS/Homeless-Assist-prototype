@@ -121,31 +121,113 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<Resource> resourceQuery(String type, String suburb, String businessType)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<Resource> results = new ArrayList<>();
-        Cursor cs = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,
-                        RESOURCE_COLUMN_SUBURB, RESOURCE_COLUMN_QUANTITY, USER_COLUMN_BUSINESS_NAME, RESOURCE_COLUMN_USERID}, RESOURCE_COLUMN_TYPE + "=" + "'" + type + "'" +
-                "AND "  + RESOURCE_COLUMN_SUBURB + "=" + "'"+ suburb + "'" + "AND " + USER_COLUMN_BUSINESS_NAME + "=" + "'" + businessType + "'", null,
-                null, null, null );
+        ArrayList<Resource> resourceList = new ArrayList<>();
+        ArrayList<String> queryString = new ArrayList<>();
+        String typeA = RESOURCE_COLUMN_TYPE + "=" + "'" + type + "'" +
+            "AND ";
+        String suburA = RESOURCE_COLUMN_SUBURB + "=" + "'"+ suburb + "'" + "AND ";
+        String busiType = USER_COLUMN_BUSINESS_NAME + "=" + "'" + businessType + "'" + "AND ";
+        queryString.add(typeA);
+        queryString.add(suburA);
+        queryString.add(busiType);
 
-        cs.moveToFirst();
-        while(cs.isAfterLast() == false) {
-            String idRet = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_ID));
-            String retType = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_TYPE));
-            String description = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_DESCRIPTION));
-            String placeID = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_PLACEID));
-            String address = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_SUBURB));
-            String quantity = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_QUANTITY));
-            String creatorID = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_USERID));
-            String businessName = cs.getString(cs.getColumnIndex(USER_COLUMN_BUSINESS_NAME));
+//        String query = RESOURCE_COLUMN_TYPE + "=" + "'" + type + "'" +
+//                "AND "  + RESOURCE_COLUMN_SUBURB + "=" + "'"+ suburb + "'" + "AND " + USER_COLUMN_BUSINESS_NAME + "=" + "'" + businessType + "'";
 
-            Resource res = new Resource(idRet, retType, description, placeID, address, Integer.parseInt(quantity), businessName, creatorID);
-            results.add(res);
+
+        if(type.contains("All"))
+        {
+         System.out.println("CONTAINS TYPE");
+          int x =  queryString.indexOf(typeA);
+            queryString.remove(x);
         }
 
-        return results;
+        if(suburb.contains("All"))
+        {
+            System.out.println("CONTAINS SUBURB");
+          int x = queryString.indexOf(suburA);
+          queryString.remove(x);
+        }
+
+        if(businessType.contains("All"))
+        {
+            System.out.println("CONTAINS BUSI");
+            int x = queryString.indexOf(busiType);
+            queryString.remove(x);
+        }
+
+        String query = "";
+
+        for(int x = 0; x < queryString.size(); x ++)
+        {
+            String tmp = queryString.get(x);
+            if(x == queryString.size() -1 || queryString.size() == 1)
+            {
+               tmp = tmp.replace("AND", "");
+                System.out.println("IS LAST REMOVE: " + tmp);
+            }
+
+            query = query + tmp;
+        }
+
+        System.out.println("QUERY: " + query);
+        System.out.println("QURERY ARRAY: " + queryString.toString());
+
+        if(query.isEmpty()){
+            Cursor res = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,
+                            RESOURCE_COLUMN_SUBURB, RESOURCE_COLUMN_QUANTITY, USER_COLUMN_BUSINESS_NAME, RESOURCE_COLUMN_USERID}, null, null,
+                    null, null, null );
+
+            res.moveToFirst();
+
+
+            while(res.isAfterLast() == false && res.getCount() > 0) {
+                Resource aResource = new Resource(
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_ID)),
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_TYPE)),
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_DESCRIPTION)),
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_PLACEID)),
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_SUBURB)),
+                        res.getInt(res.getColumnIndex((RESOURCE_COLUMN_QUANTITY))),
+                        res.getString(res.getColumnIndex(USER_COLUMN_BUSINESS_NAME)),
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_USERID)));
+                resourceList.add(aResource);
+                res.moveToNext();
+
+            }
+            res.close();
+            return resourceList;
+        } else {
+            Cursor res = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,
+                            RESOURCE_COLUMN_SUBURB, RESOURCE_COLUMN_QUANTITY, USER_COLUMN_BUSINESS_NAME, RESOURCE_COLUMN_USERID}, query, null,
+                    null, null, null );
+
+            res.moveToFirst();
+
+
+            while(res.isAfterLast() == false && res.getCount() > 0) {
+                Resource aResource = new Resource(
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_ID)),
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_TYPE)),
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_DESCRIPTION)),
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_PLACEID)),
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_SUBURB)),
+                        res.getInt(res.getColumnIndex((RESOURCE_COLUMN_QUANTITY))),
+                        res.getString(res.getColumnIndex(USER_COLUMN_BUSINESS_NAME)),
+                        res.getString(res.getColumnIndex(RESOURCE_COLUMN_USERID)));
+                resourceList.add(aResource);
+                res.moveToNext();
+
+            }
+            res.close();
+            return resourceList;
+        }
+
 
 
     }
+
+
 
     public User getUser (String email, String password) {
 
@@ -170,7 +252,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             int type = cs.getInt(cs.getColumnIndex(USER_COLUMN_TYPE));
             String contact = cs.getString(cs.getColumnIndex(USER_COLUMN_CONTACTNO));
             String businessName = cs.getString(cs.getColumnIndex(USER_COLUMN_BUSINESS_NAME));
-
+            db.close();
             User user = new User(id, emailTmp, passwordTmp, type, nme, lastName, contact, streetNo, streetName, suburb, postcode, businessName);
             return user;
 
@@ -179,23 +261,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Resource getResourceById(Long id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cs = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,
+        Cursor res = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,
                         RESOURCE_COLUMN_SUBURB, RESOURCE_COLUMN_QUANTITY, USER_COLUMN_BUSINESS_NAME, RESOURCE_COLUMN_USERID}, RESOURCE_COLUMN_ID + "=" + "'" + id + "'", null,
                 null, null, null );
 
-        cs.moveToFirst();
-        String idRet = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_ID));
-        String type = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_TYPE));
-        String description = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_DESCRIPTION));
-        String placeID = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_PLACEID));
-        String address = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_SUBURB));
-        String quantity = cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_QUANTITY));
-        String creatorID =cs.getString(cs.getColumnIndex(RESOURCE_COLUMN_USERID));
-        String businessName = cs.getString(cs.getColumnIndex(USER_COLUMN_BUSINESS_NAME));
+        res.moveToFirst();
+        Resource aResource = new Resource(
+                res.getString(res.getColumnIndex(RESOURCE_COLUMN_ID)),
+                res.getString(res.getColumnIndex(RESOURCE_COLUMN_TYPE)),
+                res.getString(res.getColumnIndex(RESOURCE_COLUMN_DESCRIPTION)),
+                res.getString(res.getColumnIndex(RESOURCE_COLUMN_PLACEID)),
+                res.getString(res.getColumnIndex(RESOURCE_COLUMN_SUBURB)),
+                res.getInt(res.getColumnIndex((RESOURCE_COLUMN_QUANTITY))),
+                res.getString(res.getColumnIndex(USER_COLUMN_BUSINESS_NAME)),
+                res.getString(res.getColumnIndex(RESOURCE_COLUMN_USERID)));
 
-        Resource res = new Resource(idRet, type, description, placeID, address, Integer.parseInt(quantity), businessName, creatorID);
-
-        return res;
+        return aResource;
     }
 
 

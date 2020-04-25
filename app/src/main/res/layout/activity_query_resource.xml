@@ -39,16 +39,16 @@
 
     <ListView
         android:id="@+id/list"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_width="383dp"
-
+        android:layout_width="400dp"
+        android:layout_height="540dp"
         android:layout_marginStart="12dp"
+
         android:layout_marginTop="48dp"
+        android:layout_weight="1"
 
         android:clickable="true"
         android:scrollbarSize="3dp"
-        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarStyle="insideOverlay"
         android:scrollbars="vertical"
         android:scrollingCache="true"
         android:smoothScrollbar="true"

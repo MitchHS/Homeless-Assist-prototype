@@ -5,8 +5,10 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -14,6 +16,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class QueryResourceActivity extends Activity {
+  public  ListView lv;
+    Spinner suburbSpinner;
+    ArrayAdapter<String> suburbAdapter;
+    ArrayList<String> suburbs = new ArrayList<>();
+    ArrayList<Resource> resources = new ArrayList<>();
+    ArrayAdapter<Resource> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,32 +29,25 @@ public class QueryResourceActivity extends Activity {
         setContentView(R.layout.activity_query_resource);
         Spinner typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
         Spinner businessTypeSpinner = (Spinner) findViewById(R.id.businessTypeSpinner);
-        Spinner suburbSpinner = (Spinner) findViewById(R.id.suburbSpinner);
-        ListView lv = findViewById(R.id.list);
+        suburbSpinner = (Spinner) findViewById(R.id.suburbSpinner);
+        lv = findViewById(R.id.list);
         DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
-        ArrayList<Resource> allResources = db.getAllResources();
-        ArrayList<String> suburbs = new ArrayList<>();
+       // resources = db.getAllResources();
+
         suburbs.add("All");
 
-//        // Init the all suburbs for
-//        for (int x = 0; x < allResources.size(); x++) {
-//            if (suburbs.contains(allResources.get(x).getSuburb())) {
-//                continue;
-//            } else {
-//                suburbs.add(allResources.get(x).getSuburb());
-//            }
-//        }
+//
 
-        ArrayAdapter<Resource> arrayAdapter = new ArrayAdapter<Resource>(
+         arrayAdapter = new ArrayAdapter<Resource>(
                 this,
                 android.R.layout.simple_list_item_1,
-                allResources);
+                resources);
 
         lv.setAdapter(arrayAdapter);
 
         // suburbs
 
-        ArrayAdapter<String> suburbAdapter =
+        suburbAdapter =
                 new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, suburbs);
         suburbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -74,13 +75,8 @@ public class QueryResourceActivity extends Activity {
        // db.resourceQuery("Food", "Forde", "private user");
 
         lv.setClickable(true);
-        lv.setNestedScrollingEnabled(true);
-//        lv.setOnItemClickListener((arg0, arg1, position, arg3) -> {
+
 //
-//
-//
-//
-//        });
 
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -107,14 +103,16 @@ public class QueryResourceActivity extends Activity {
 
     public void updateList(String type, String suburb, String businessType, int suburbPos) {
         DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
-        ListView lv = findViewById(R.id.list);
-
+        lv = findViewById(R.id.list);
 
         //TODO: db query for function args (on update selection)
-        ArrayList<Resource> resources = db.resourceQuery(type, suburb, businessType);
+
+        lv.invalidateViews();
+        resources = db.resourceQuery(type, suburb, businessType);
+        System.out.println("resource: " + resources);
         ArrayList<Resource> suburbQuery = db.resourceQuery(type, "All", businessType);
         Spinner suburbSpinner = findViewById(R.id.suburbSpinner);
-        ArrayList<String> suburbs = new ArrayList<>();
+        suburbs.clear();
         suburbs.add("All");
 
         for (int x = 0; x < suburbQuery.size(); x++) {
@@ -125,20 +123,22 @@ public class QueryResourceActivity extends Activity {
             }
         }
         db.close();
-        ArrayAdapter<String> suburbAdapter =
-                new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, suburbs);
-        suburbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        suburbAdapter.notifyDataSetChanged();
+       arrayAdapter.notifyDataSetChanged();
+//         suburbAdapter =
+//                new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, suburbs);
+//        suburbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<Resource> arrayAdapter = new ArrayAdapter<Resource>(
                 this,
                 android.R.layout.simple_list_item_1,
                 resources);
-
+//
         lv.setAdapter(arrayAdapter);
-        suburbSpinner.setAdapter(suburbAdapter);
+       // suburbSpinner.setAdapter(suburbAdapter);
         if(suburbPos < suburbSpinner.getCount())
         { suburbSpinner.setSelection(suburbPos);}
-       // setSpinnerListener(suburbSpinner);
-    db.close();
+        setSpinnerListener(suburbSpinner);
+
 
     }
 

@@ -80,11 +80,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<Resource> getAllResources()
+    public ArrayList<Resource> getAllResources(Integer userID)
     {
         ArrayList<Resource> resourceList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + RESOURCE_TABLE_NAME, null);
+        String query = "select * from " + RESOURCE_TABLE_NAME + " where " + RESOURCE_COLUMN_USERID + "=" + userID;
+        Cursor res = db.rawQuery(query, null);
 
         res.moveToFirst();
 
@@ -170,13 +171,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if(x == queryString.size() -1 || queryString.size() == 1)
             {
                tmp = tmp.replace("AND", "");
-
             }
-
             query = query + tmp;
         }
-
-
 
         if(query.isEmpty()){
             Cursor res = db.query(RESOURCE_TABLE_NAME, new String[]{RESOURCE_COLUMN_ID, RESOURCE_COLUMN_TYPE, RESOURCE_COLUMN_DESCRIPTION, RESOURCE_COLUMN_PLACEID,

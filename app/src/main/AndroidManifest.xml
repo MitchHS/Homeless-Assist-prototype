@@ -26,7 +26,6 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".ResourceRegisterActivity" />
-        <activity android:name=".accountHome" />
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"

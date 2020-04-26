@@ -10,9 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e00dd355-7186-4ef7-9096-641cf0dadc4b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/DatabaseHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/DatabaseHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/MainMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/MainMenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/ManageResourcesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/ManageResourcesActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/QueryResourceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/QueryResourceActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/ViewUserResourcesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/ViewUserResourcesActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/accountHome.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_account_home.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_manage_resources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_manage_resources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_view_user_resources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_view_user_resources.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +59,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3_API_26" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-25T14:22:19.167Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-26T15:28:15.414Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />

@@ -94,6 +94,17 @@ public class QueryResourceActivity extends Activity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Bundle data = getIntent().getExtras();
+        User user = (User) data.getParcelable("user");
+        intent.putExtra("user", user );
+        startActivity(intent);
+        finish();
+    }
+
 
     public void updateList(String type, String suburb, String businessType, int suburbPos) {
         DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);

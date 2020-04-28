@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:scrollbars="none"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,17 +14,38 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="-70dp">
 
-        <TextView
-            android:id="@+id/textView2"
+        <Button
+            android:id="@+id/registerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="136dp"
-            android:layout_marginTop="88dp"
-            android:hint=""
-            android:text="Personal Details"
-            android:textColor="#0B0A0A"
+            android:layout_marginStart="121dp"
+            android:layout_marginTop="28dp"
+            android:onClick="registerClick"
+            android:text="register"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/businessName" />
+
+        <CheckBox
+            android:id="@+id/busiBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="92dp"
+            android:onClick="isBusinessClick"
+            android:text="I am a business"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/permAddress" />
+
+        <CheckBox
+            android:id="@+id/permAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="108dp"
+            android:layout_marginTop="32dp"
+            android:onClick="permAddressClick"
+            android:text="No permanent address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
 
         <EditText
             android:id="@+id/streetName"
@@ -76,17 +98,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contactNo" />
 
-        <CheckBox
-            android:id="@+id/busiBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="92dp"
-            android:text="I am a business"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="isBusinessClick"
-            app:layout_constraintTop_toBottomOf="@+id/permAddress" />
-
         <EditText
             android:id="@+id/lastName"
             android:layout_width="254dp"
@@ -120,6 +131,7 @@
             android:ems="10"
             android:hint="confirm password"
             android:inputType="textPersonName"
+            android:password="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -136,17 +148,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addressTv" />
 
-        <CheckBox
-            android:id="@+id/permAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="108dp"
-            android:layout_marginTop="32dp"
-            android:onClick="permAddressClick"
-            android:text="No permanent address"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
-
         <EditText
             android:id="@+id/password"
             android:layout_width="254dp"
@@ -155,21 +156,9 @@
             android:layout_marginTop="28dp"
             android:ems="10"
             android:hint="password"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textPassword"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email" />
-
-        <TextView
-            android:id="@+id/addressTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="168dp"
-            android:layout_marginTop="24dp"
-            android:hint=""
-            android:text="Address"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/busiBox" />
 
         <EditText
             android:id="@+id/suburb"
@@ -184,17 +173,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/streetName" />
 
-        <Button
-            android:id="@+id/registerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="121dp"
-            android:layout_marginTop="28dp"
-            android:onClick="registerClick"
-            android:text="register"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/businessName" />
-
         <EditText
             android:id="@+id/firstName"
             android:layout_width="254dp"
@@ -206,6 +184,30 @@
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="88dp"
+            android:hint=""
+            android:text="Personal Details"
+            android:textColor="#0B0A0A"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/addressTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="24dp"
+            android:hint=""
+            android:text="Address"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/busiBox" />
 
         <TextView
             android:id="@+id/permAddressTv"

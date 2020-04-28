@@ -48,7 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         AtomicReference<LatLng> placeLatLng  = null;
 
-        // Initialize the SDK
+        // Initialize the SDK. Replace with your own API code.
         Places.initialize(getApplicationContext(), "AIzaSyB-xVQy82Wj0-WneALqfcL0C4PKSYolJsI");
         Bundle data = getIntent().getExtras();
         User user = (User) data.getParcelable("user");

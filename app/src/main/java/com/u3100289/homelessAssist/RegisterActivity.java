@@ -39,8 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+
 
         EditText streetNum = findViewById(R.id.streetNum);
         EditText streetName = findViewById(R.id.streetName);
@@ -455,6 +455,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                startActivity(i);
+               String text = "Registered Successfully";
+               int duration = Toast.LENGTH_LONG;
+               Toast toast = Toast.makeText(context, text, duration);
+               toast.show();
            } else {
                String text = "User already exists";
                int duration = Toast.LENGTH_LONG;

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -90,16 +91,22 @@ public class ManageResourcesActivity extends AppCompatActivity {
         if (resource.getQuantity() == 0) {
             new AlertDialog.Builder(this)
                     .setTitle("Title")
-                    .setMessage("Do you really want to whatever?")
+                    .setMessage("Do you really want to delete this resource?")
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            Toast.makeText(getApplicationContext(), "Resource Deleted", Toast.LENGTH_SHORT).show();
-                            resource.quanity--;
-                            db.deleteResource(resource);
-                            quantity.setText("0");
 
+                                if(whichButton == -1) {
+                                    Toast.makeText(getApplicationContext(), "Resource Deleted", Toast.LENGTH_SHORT).show();
+                                    db.deleteResource(resource);
+                                    quantity.setText("0");
+                                    Bundle data = getIntent().getExtras();
+                                    User user = (User) data.getParcelable("user");
+                                    Intent i = new Intent(getApplicationContext(), ViewUserResourcesActivity.class);
+                                    i.putExtra("user", user );
+                                    startActivity(i);
+                                }
                         }
                     })
                     .setNegativeButton(android.R.string.no, null).show();
@@ -110,7 +117,6 @@ public class ManageResourcesActivity extends AppCompatActivity {
             db.updateResource(resource);
             Resource newRes = db.getResourceById(Long.parseLong(res.getId()));
             System.out.println("NEW RES" + newRes);
-
             quantity.setEnabled(true);
             quantity.setText(String.valueOf(newRes.getQuantity()));
 
@@ -120,7 +126,39 @@ public class ManageResourcesActivity extends AppCompatActivity {
 
     public void onDeleteClick (View v)
     {
+        Bundle data = getIntent().getExtras();
+        Resource res = (Resource) data.getParcelable("resource");
+        DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
 
+        new AlertDialog.Builder(this)
+                .setTitle("Title")
+                .setMessage("Do you really want to delete this resource?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        if(whichButton == -1) {
+                            Toast.makeText(getApplicationContext(), "Resource Deleted", Toast.LENGTH_SHORT).show();
+                            db.deleteResource(res);
+
+                            Bundle data = getIntent().getExtras();
+                            User user = (User) data.getParcelable("user");
+                            Intent i = new Intent(getApplicationContext(), ViewUserResourcesActivity.class);
+                            i.putExtra("user", user );
+                            startActivity(i);
+                        }
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
     }
 
+    @Override
+    public void onBackPressed() {
+        Bundle data = getIntent().getExtras();
+        User user = (User) data.getParcelable("user");
+        Intent i = new Intent(getApplicationContext(), ViewUserResourcesActivity.class);
+        i.putExtra("user", user );
+        startActivity(i);
+    }
 }

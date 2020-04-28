@@ -44,8 +44,10 @@ public class ViewUserResourcesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = lv.getItemAtPosition(position);
                 Resource res = (Resource) lv.getItemAtPosition(position);
+                User user = (User) data.getParcelable("user");
                 Intent i = new Intent(getApplicationContext(), ManageResourcesActivity.class);
                 i.putExtra("resource", res );
+                i.putExtra("user", user);
                 startActivity(i);
             }
         });

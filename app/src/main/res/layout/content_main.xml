@@ -84,11 +84,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="79dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="Fair Canberra Prototype"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Fair Canberra Prototype" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"

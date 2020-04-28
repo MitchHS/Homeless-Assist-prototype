@@ -342,6 +342,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return Long.toString(id);
     }
 
+    public void updateResource (Resource resource)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(RESOURCE_COLUMN_TYPE, resource.getType());
+        contentValues.put(RESOURCE_COLUMN_DESCRIPTION, resource.getDescription());
+        contentValues.put(RESOURCE_COLUMN_PLACEID, resource.getPlaceID());
+        contentValues.put(RESOURCE_COLUMN_SUBURB, resource.getSuburb());
+        contentValues.put(RESOURCE_COLUMN_QUANTITY, resource.getQuantity());
+        contentValues.put(USER_COLUMN_BUSINESS_NAME, resource.getBusinessName());
+        contentValues.put(RESOURCE_COLUMN_USERID, resource.getUserID());
+        db.update(RESOURCE_TABLE_NAME, contentValues, RESOURCE_COLUMN_ID +"="+"'" +resource.getId()+"'", null  );
+
+
+    }
+
+    public void deleteResource(Resource resource)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(RESOURCE_TABLE_NAME,RESOURCE_COLUMN_ID +"="+"'" +resource.getId()+"'", null );
+    }
+
 
 
 }

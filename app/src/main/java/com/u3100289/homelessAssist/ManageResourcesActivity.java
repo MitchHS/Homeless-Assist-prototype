@@ -1,11 +1,14 @@
 package com.u3100289.homelessAssist;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -59,12 +62,60 @@ public class ManageResourcesActivity extends AppCompatActivity {
 
     public void onIncrementClick (View v)
     {
+        Bundle data = getIntent().getExtras();
+        Resource res = (Resource) data.getParcelable("resource");
+        DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
+        EditText quantity = findViewById(R.id.quantityEdit);
+        Resource resource = db.getResourceById(Long.parseLong(res.getId()));
+
+
+        System.out.println("ORGIG res" + resource);
+        resource.quanity ++;
+        db.updateResource(resource);
+        Resource newRes = db.getResourceById(Long.parseLong(res.getId()));
+        System.out.println("NEW RES" + newRes);
+
+        quantity.setText(String.valueOf(newRes.getQuantity()));
+
 
     }
 
-    public void onDecrementClick (View v)
-    {
+    public void onDecrementClick (View v) {
+        Bundle data = getIntent().getExtras();
+        Resource res = (Resource) data.getParcelable("resource");
+        DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
+        EditText quantity = findViewById(R.id.quantityEdit);
 
+        Resource resource = db.getResourceById(Long.parseLong(res.getId()));
+        if (resource.getQuantity() == 0) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Title")
+                    .setMessage("Do you really want to whatever?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Toast.makeText(getApplicationContext(), "Resource Deleted", Toast.LENGTH_SHORT).show();
+                            resource.quanity--;
+                            db.deleteResource(resource);
+                            quantity.setText("0");
+
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null).show();
+        } else {
+
+
+            resource.quanity--;
+            db.updateResource(resource);
+            Resource newRes = db.getResourceById(Long.parseLong(res.getId()));
+            System.out.println("NEW RES" + newRes);
+
+            quantity.setEnabled(true);
+            quantity.setText(String.valueOf(newRes.getQuantity()));
+
+
+        }
     }
 
     public void onDeleteClick (View v)

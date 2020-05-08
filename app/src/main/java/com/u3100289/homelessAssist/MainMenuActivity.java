@@ -3,6 +3,8 @@ package com.u3100289.homelessAssist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -17,6 +19,9 @@ public class MainMenuActivity extends AppCompatActivity {
         User user = (User) data.getParcelable("user");
         TextView title = findViewById(R.id.welcomeTv);
         title.setText("Welcome " + user.getName() + "!");
+        EventActivity ea = new EventActivity(MainMenuActivity.this);
+        ea.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        ea.show();
     }
 
 

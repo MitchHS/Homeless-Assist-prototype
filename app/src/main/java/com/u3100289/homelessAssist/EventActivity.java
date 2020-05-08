@@ -2,6 +2,7 @@ package com.u3100289.homelessAssist;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;;
+import android.app.Activity;
 import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
@@ -23,7 +24,7 @@ import static android.R.layout.simple_list_item_1;
 
 public class EventActivity extends Dialog implements
         android.view.View.OnClickListener  {
-
+    public Activity thisActivity;
 
     public EventActivity(@NonNull Context context) {
         super(context);
@@ -78,8 +79,7 @@ public class EventActivity extends Dialog implements
 
     @Override
     public void onClick(View v) {
-        
-
+        this.dismiss();
 
     }
 }

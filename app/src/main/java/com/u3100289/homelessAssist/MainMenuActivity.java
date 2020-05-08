@@ -24,6 +24,13 @@ public class MainMenuActivity extends AppCompatActivity {
         ea.show();
     }
 
+    public void viewEventClick(View v){
+
+        EventActivity ea = new EventActivity(MainMenuActivity.this);
+        ea.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        ea.show();
+    }
+
 
     public void onManageClick (View v)
     {

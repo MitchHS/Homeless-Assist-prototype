@@ -11,8 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e00dd355-7186-4ef7-9096-641cf0dadc4b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/EventActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/EventActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_event.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_event.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/MainMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/MainMenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main_menu.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +36,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.u3100289.homelessAssist">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/HiddenTitleTheme">
-        <activity android:name=".ViewUserResourcesActivity"></activity>
+        <activity android:name=".EventActivity"></activity>
+        <activity android:name=".ViewUserResourcesActivity" />
         <activity android:name=".ManageResourcesActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".QueryResourceActivity" />
@@ -26,16 +29,9 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".ResourceRegisterActivity" />
-
-        <activity
-            android:name=".RegisterActivity"
-           >
-
-        </activity>
-
+        <activity android:name=".RegisterActivity" />
         <activity
             android:name=".LoginActivity"
-
             android:theme="@style/HiddenTitleTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,7 +44,5 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

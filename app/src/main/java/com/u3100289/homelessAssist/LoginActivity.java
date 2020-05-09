@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,6 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
+
 
 
 
@@ -51,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Intent i = new Intent(getApplicationContext(), MainMenuActivity.class);
             i.putExtra("user", user );
+            i.putExtra("onLogin", 1);
             db.close();
             startActivity(i);
 

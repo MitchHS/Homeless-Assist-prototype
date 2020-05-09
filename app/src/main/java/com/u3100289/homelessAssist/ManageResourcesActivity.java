@@ -158,6 +158,8 @@ public class ManageResourcesActivity extends AppCompatActivity {
         Bundle data = getIntent().getExtras();
         User user = (User) data.getParcelable("user");
         Intent i = new Intent(getApplicationContext(), ViewUserResourcesActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getIntent().removeExtra("onLogin");
         i.putExtra("user", user );
         startActivity(i);
     }

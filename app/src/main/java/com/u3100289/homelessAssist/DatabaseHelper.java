@@ -33,10 +33,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String USER_COLUMN_CONTACTNO = "phone";
     public static final String USER_COLUMN_BUSINESS_NAME = "businessName";
 
+    // Events
+    public static final String EVENT_TABLE_NAME = "events";
+    public static final String EVENT_ID = "id";
+    public static final String EVENT_TITLE = "title";
+    public static final String EVENT_DATE = "date";
+    public static final String EVENT_DESCRIPTION = "description";
+    public static final String EVENT_COLUMN_STREET_NUMBER = "streetNumber";
+    public static final String EVENT_COLUMN_STREET_NAME = "streetName";
+    public static final String EVENT_COLUMN_SUBURB = "suburb";
+    public static final String EVENT_COLUMN_POSTCODE = "postcode";
+
+
+
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
 
     }
+
 
 
     @Override
@@ -59,7 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         db.execSQL("create table " + RESOURCE_TABLE_NAME + "(" +
-                RESOURCE_COLUMN_ID + " integer primary key, " +
+                RESOURCE_COLUMN_ID +  " integer primary key AUTOINCREMENT NOT NULL, " +
                 RESOURCE_COLUMN_TYPE + " text, " + // Dropdown box of types in the app
                 RESOURCE_COLUMN_DESCRIPTION + " text, " + // User description of the resource
                 RESOURCE_COLUMN_PLACEID + " text, " + // Google API Place id for street Address
@@ -68,6 +82,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 USER_COLUMN_BUSINESS_NAME + " integer, " +
                 RESOURCE_COLUMN_USERID + " integer, " +
                 " FOREIGN KEY ("+RESOURCE_COLUMN_USERID+") REFERENCES "+USER_TABLE_NAME+"("+USER_COLUMN_ID+")) "); // FK of user
+
+        db.execSQL("create table " + EVENT_TABLE_NAME + "(" +
+                EVENT_ID +  " integer primary key AUTOINCREMENT NOT NULL, " +
+                EVENT_TITLE + " text, " +
+                EVENT_DATE + " text, " +
+                EVENT_DESCRIPTION + " text, " +
+                EVENT_COLUMN_STREET_NUMBER + " integer, " +
+                EVENT_COLUMN_STREET_NAME + " text, " +
+                EVENT_COLUMN_SUBURB + " text, " +
+                EVENT_COLUMN_POSTCODE + " integer )");
     }
 
     @Override
@@ -75,6 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("drop table if exists " + USER_TABLE_NAME);
         db.execSQL("drop table if exists " + RESOURCE_TABLE_NAME);
+        db.execSQL("drop table if exists " + EVENT_TABLE_NAME);
         onCreate(db);
 
 
@@ -105,6 +130,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
         return resourceList;
+    }
+
+    public ArrayList<Event> getAllEvents()
+    {
+        ArrayList<Event> eventList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "select * from " + EVENT_TABLE_NAME;
+        Cursor res = db.rawQuery(query, null);
+
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false)
+        {
+            Event aEvent = new Event(
+                    res.getString(res.getColumnIndex(EVENT_ID)),
+                    res.getString(res.getColumnIndex(EVENT_TITLE)),
+                    res.getString(res.getColumnIndex(EVENT_DATE)),
+                    res.getString(res.getColumnIndex(EVENT_DESCRIPTION)),
+                    res.getInt(res.getColumnIndex(EVENT_COLUMN_STREET_NUMBER)),
+                    res.getString(res.getColumnIndex((EVENT_COLUMN_STREET_NAME))),
+                    res.getString(res.getColumnIndex(EVENT_COLUMN_SUBURB)),
+                    res.getInt(res.getColumnIndex(EVENT_COLUMN_POSTCODE)));
+            eventList.add(aEvent);
+            res.moveToNext();
+
+        }
+        return eventList;
     }
 
 
@@ -288,6 +340,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if(cs.moveToFirst()){ return true;}
         return false;
+
+    }
+
+    public String insertEvent(Event event)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(EVENT_TITLE, event.title);
+        contentValues.put(EVENT_DATE, event.date);
+        contentValues.put(EVENT_DESCRIPTION, event.description);
+        contentValues.put(EVENT_COLUMN_STREET_NUMBER, event.streetNo);
+        contentValues.put(EVENT_COLUMN_STREET_NAME, event.streetName);
+        contentValues.put(EVENT_COLUMN_SUBURB, event.suburb);
+        contentValues.put(EVENT_COLUMN_POSTCODE, event.postcode);
+
+        long id = db.insert(EVENT_TABLE_NAME, null, contentValues);
+        return Long.toString(id);
+
 
     }
 

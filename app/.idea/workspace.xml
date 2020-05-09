@@ -12,18 +12,10 @@
     <list default="true" id="e00dd355-7186-4ef7-9096-641cf0dadc4b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/DatabaseHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/DatabaseHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/MainMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/MainMenuActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/ManageResourcesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/ManageResourcesActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/QueryResourceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/QueryResourceActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/ViewUserResourcesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/ViewUserResourcesActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/u3100289/homelessAssist/accountHome.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_account_home.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_manage_resources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_manage_resources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_view_user_resources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_view_user_resources.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +23,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_26" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_XL_API_27" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -48,6 +40,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -64,6 +57,11 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.packageName">
+      <recent name="com.u3100289.homelessAssist" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

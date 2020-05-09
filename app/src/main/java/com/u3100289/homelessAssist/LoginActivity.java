@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Intent i = new Intent(getApplicationContext(), MainMenuActivity.class);
             i.putExtra("user", user );
+            i.putExtra("onLogin", 1);
             db.close();
             startActivity(i);
 

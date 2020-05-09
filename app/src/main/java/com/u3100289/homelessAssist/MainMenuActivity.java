@@ -18,10 +18,17 @@ public class MainMenuActivity extends AppCompatActivity {
         Bundle data = getIntent().getExtras();
         User user = (User) data.getParcelable("user");
         TextView title = findViewById(R.id.welcomeTv);
+
+        int x = data.getInt("onLogin");
+        System.out.println("X"  + x);
+
+        if(x > 0){
+            EventActivity ea = new EventActivity(MainMenuActivity.this);
+            ea.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+            ea.show();
+        }
         title.setText("Welcome " + user.getName() + "!");
-        EventActivity ea = new EventActivity(MainMenuActivity.this);
-        ea.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        ea.show();
+
     }
 
     public void viewEventClick(View v){

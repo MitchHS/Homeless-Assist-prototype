@@ -26,9 +26,6 @@ public class LoginActivity extends AppCompatActivity {
                 "19", "lonsdale street",  "braddon", "2616", "Grease Monkey" ));}
         db.close();
 
-
-
-
     }
 
     public void toRegister(View v) {

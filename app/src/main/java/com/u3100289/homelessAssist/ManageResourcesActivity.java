@@ -118,7 +118,7 @@ public class ManageResourcesActivity extends AppCompatActivity {
             System.out.println("NEW RES" + newRes);
             quantity.setEnabled(true);
             quantity.setText(String.valueOf(newRes.getQuantity()));
-            
+
         }
     }
 

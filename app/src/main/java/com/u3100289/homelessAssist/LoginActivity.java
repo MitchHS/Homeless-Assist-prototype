@@ -21,7 +21,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DatabaseHelper db = new DatabaseHelper(this, "fairCanberraDB", null, 1);
-
+        ArrayList<Event> ev = db.getAllEvents();
+        if(ev.isEmpty()){  db.insertUser(new User("1", "admin@example.com", "password", 2, "mitchell", "hunt", "0416211080",
+                "19", "lonsdale street",  "braddon", "2616", "Grease Monkey" ));}
+        db.close();
 
 
 

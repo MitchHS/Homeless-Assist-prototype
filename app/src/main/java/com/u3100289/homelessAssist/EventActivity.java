@@ -62,6 +62,23 @@ public class EventActivity extends Dialog implements
                     android.R.layout.simple_list_item_1,
                     eventArray);
             lv.setAdapter(arrayAdapter);
+
+            db.insertUser(new User("2", "private@example.com", "password", 1, "john", "doe", "0416211080", "63", "mcgovern street",  "casey", "2913", "private user" ));
+            db.insertUser(new User("3", "hyatt@example.com", "password", 2, "michael", "james", "0416211080", "120", "commonwealth avenue",  "yarralumla", "2600", "Hyatt Hotel" ));
+            db.insertResource(new Resource("1", "Food", "Example Food", "ChIJQWzEXWFNFmsR9GDCpxQ808g", "Braddon", 10, "Grease Monkey", "1"));
+            db.insertResource(new Resource("2", "Food", "Another food Example", "ChIJJUsFufZUFmsR5Q-1f56uTEk", "Forde", 1, "Grease Moneky", "1"));
+            db.insertResource(new Resource("3", "Beverages", "Example Beverage", "EipDYW5iZXJyYSBBdmUsIEdyaWZmaXRoIEFDVCAyNjAzLCBBdXN0cmFsaWEiLiosChQKEgnb5Gv-OEwWaxE6Ec8hc7G3sxIUChIJM1ngD_JMFmsREFdpp27qAAU", "Griffith", 1, "Grease Monkey", "1"));
+            db.insertResource(new Resource("4", "Beverages", "Example Beverages 2", "ChIJQWzEXWFNFmsR9GDCpxQ808g", "Braddon", 1, "Grease Monkey", "1"));
+            db.insertResource(new Resource("5", "Clothing", "Example clothing", "ChIJHR0kf0qrF2sRORKQ71Ls574", "Casey", 1, "private user", "2"));
+            db.insertResource(new Resource("6", "Clothing", "Example Clothing 2", "EiREYXZpZCBTdCwgVHVybmVyIEFDVCAyNjEyLCBBdXN0cmFsaWEiLiosChQKEgn_Ad_OoFIWaxGb-kHZEXYpLRIUChIJK_j30aFSFmsRMFZpp27qAAU", "Turner", 1,"private user", "2" ));
+            db.insertResource(new Resource("7", "Utilities", "Example Utilities", "ChIJbfET155UFmsRyyGqn9P6qVo", "Gungahlin", 1, "private user", "2"));
+            db.insertResource(new Resource( "8", "Housing", "Temp accomodation exame", "ChIJ7RovVSJNFmsRjOdxPHN_5sI", "Yarralumla", 1, "Hyatt Hotel", "3"));
+
+
+
+
+
+
         } else {
 
             arrayAdapter = new ArrayAdapter<Event>(

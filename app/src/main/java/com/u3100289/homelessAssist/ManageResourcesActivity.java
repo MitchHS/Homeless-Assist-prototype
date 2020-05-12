@@ -88,9 +88,9 @@ public class ManageResourcesActivity extends AppCompatActivity {
         EditText quantity = findViewById(R.id.quantityEdit);
 
         Resource resource = db.getResourceById(Long.parseLong(res.getId()));
-        if (resource.getQuantity() == 0) {
+        if (resource.getQuantity() == 1) {
             new AlertDialog.Builder(this)
-                    .setTitle("Title")
+                    .setTitle("Confirmation")
                     .setMessage("Do you really want to delete this resource?")
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -112,15 +112,13 @@ public class ManageResourcesActivity extends AppCompatActivity {
                     .setNegativeButton(android.R.string.no, null).show();
         } else {
 
-
             resource.quanity--;
             db.updateResource(resource);
             Resource newRes = db.getResourceById(Long.parseLong(res.getId()));
             System.out.println("NEW RES" + newRes);
             quantity.setEnabled(true);
             quantity.setText(String.valueOf(newRes.getQuantity()));
-
-
+            
         }
     }
 
